@@ -1,0 +1,19 @@
+{
+  "client_id": "https://wakahuula.github.io/overload-site/oauth-client-metadata.json",
+  "client_name": "Overload",
+  "client_uri": "https://wakahuula.github.io/overload-site",
+  "redirect_uris": [
+    "io.github.wakahuula:/auth/callback"
+  ],
+  "scope": "atproto repo:app.bsky.feed.like repo:app.bsky.feed.post rpc:*?aud=did:web:api.bsky.app#bsky_appview",
+  "token_endpoint_auth_method": "none",
+  "response_types": [
+    "code"
+  ],
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "application_type": "native",
+  "dpop_bound_access_tokens": true
+}
