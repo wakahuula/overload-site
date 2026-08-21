@@ -1,29 +1,891 @@
 <!doctype html>
+<html lang="de">
+<head>
 <meta charset="utf-8" />
-<title>Overload</title>
+<title>Overload — Mehr Gewicht. Jede Woche.</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Overload ist der Workout-Tracker für Kraftsport. Offline-first, alles auf dem Gerät. Mehr Gewicht, jede Woche." />
+<meta name="theme-color" content="#0E1113" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  body {
-    background: #0e1113;
-    color: #edf1ef;
-    font: 16px/1.6 system-ui, sans-serif;
-    margin: 0;
-    padding: 3rem 1.5rem;
+  :root {
+    --bg: #0E1113;
+    --surface: #161B1E;
+    --raised: #1E2428;
+    --line: #282F34;
+    --line-soft: #20262A;
+    --text: #EDF1EF;
+    --mut: #8B939B;
+    --faint: #5C646C;
+    --text-dim: #C4CBC9;
+
+    --plate25: #D63B34;
+    --plate20: #3567CE;
+    --plate15: #DCA92E;
+    --plate10: #379A5B;
+    --plate5:  #E6E6E0;
+
+    --tint-action: #F0837D;
+    --tint-info: #8FAEF0;
+    --tint-effort: #E5C46A;
+    --tint-success: #7CC79A;
+
+    --disp: 'Barlow Condensed', sans-serif;
+    --body: 'Barlow', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
   }
-  main { max-width: 34rem; margin: 0 auto; }
-  h1 { font-size: 2rem; letter-spacing: 0.02em; margin: 0 0 0.5rem; }
-  p { color: #c4cbc9; }
-  a { color: #8faef0; }
-  code { color: #8b939b; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 400 16px/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--plate25); color: #fff; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  .mono-label {
+    font: 500 11px/1.4 var(--mono);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mut);
+  }
+  h2 {
+    font: 700 clamp(34px, 5vw, 56px)/0.95 var(--disp);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 12px 0 16px;
+  }
+  .lead { color: var(--text-dim); max-width: 58ch; text-wrap: pretty; }
+
+  /* ── Nav ──────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    background: rgba(14,17,19,0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 240ms ease;
+  }
+  nav.scrolled { border-bottom-color: var(--line-soft); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .wordmark { display: inline-flex; align-items: center; text-decoration: none; }
+  /* App-Logo: OVER / LOAD gestapelt + vier Farbbalken */
+  .logo { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+  .logo .w {
+    font: 700 var(--lw, 13px)/0.92 var(--disp);
+    letter-spacing: 0.055em;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+  /* Balkenreihe folgt exakt der Wortbreite — OVER/LOAD steht vollständig über den Scheiben */
+  .logo .bars { display: flex; gap: var(--lg, 2px); align-self: stretch; margin-top: 2px; }
+  .logo .bars i { flex: 1; display: block; height: max(3px, calc(var(--lw, 13px) * 0.22)); border-radius: 1px; }
+  .logo .bars i:nth-child(1) { background: var(--plate25); }
+  .logo .bars i:nth-child(2) { background: var(--plate20); }
+  .logo .bars i:nth-child(3) { background: var(--plate15); }
+  .logo .bars i:nth-child(4) { background: var(--plate10); }
+  nav .links { display: flex; align-items: center; gap: 24px; }
+  nav .links a {
+    font: 500 12px var(--mono);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mut);
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+  nav .links a:hover { color: var(--text); }
+  @media (max-width: 560px) { nav .links a.hide-sm { display: none; } }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex; align-items: center;
+    padding: 120px 0 80px;
+    overflow: hidden;
+  }
+  /* Lichtkegel + feines Raster */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 90% 65% at 50% -10%, rgba(214,59,52,0.13), transparent 62%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 96px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 96px);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; width: 100%; }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; margin-bottom: 28px;
+    font: 500 11px var(--mono); letter-spacing: 1px; text-transform: uppercase;
+    color: var(--mut);
+  }
+  .kicker::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--plate10);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.35; }
+  }
+
+  .hero h1 {
+    font: 700 clamp(58px, 12vw, 150px)/0.9 var(--disp);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .hero h1 em { font-style: normal; color: var(--plate25); }
+  /* gestaffelter Type-Reveal */
+  .reveal-line { display: block; overflow: hidden; }
+  .reveal-line > span {
+    display: block;
+    transform: translateY(110%);
+    animation: rise 800ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .reveal-line:nth-child(2) > span { animation-delay: 120ms; }
+  @keyframes rise { to { transform: translateY(0); } }
+
+  .hero p.lead { font-size: 18px; margin-top: 26px; opacity: 0; animation: fade 600ms ease 450ms forwards; }
+  @keyframes fade { to { opacity: 1; } }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; opacity: 0; animation: fade 600ms ease 600ms forwards; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 52px; padding: 15px 28px;
+    border-radius: 12px;
+    font: 600 16px var(--body);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: transform 160ms ease, opacity 160ms ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn-action {
+    background: var(--plate25); color: #fff;
+    box-shadow: 0 8px 32px -8px rgba(214,59,52,0.5);
+  }
+  .btn-action:hover { opacity: 0.92; }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text-dim); }
+  .btn-ghost:hover { border-color: #3A4147; color: var(--text); }
+
+  /* Scroll-Hinweis */
+  .scroll-hint {
+    position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
+    font: 500 10px var(--mono); letter-spacing: 2px; text-transform: uppercase;
+    color: var(--faint);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .scroll-hint::after {
+    content: ''; width: 1px; height: 34px;
+    background: linear-gradient(180deg, var(--faint), transparent);
+    animation: drop 1.8s ease-in-out infinite;
+  }
+  @keyframes drop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    45% { transform: scaleY(1); transform-origin: top; }
+    55% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── Marquee ──────────────────────────────────────────── */
+  .marquee {
+    border-block: 1px solid var(--line-soft);
+    padding: 18px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+  }
+  .marquee-track {
+    display: flex; gap: 48px;
+    padding-right: 48px;
+    flex: none;
+    animation: slide 22s linear infinite;
+  }
+  @keyframes slide { to { transform: translateX(-100%); } }
+  .marquee b {
+    font: 700 26px/1 var(--disp);
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .marquee small {
+    font: 500 26px/1 var(--mono); color: var(--faint);
+  }
+  .mq-red { color: var(--plate25); } .mq-blue { color: var(--plate20); }
+  .mq-yellow { color: var(--plate15); } .mq-green { color: var(--plate10); }
+  .mq-white { color: var(--plate5); }
+
+  /* ── Load-Section: Hantel belädt sich beim Scrollen ───── */
+  .load-section { height: 320vh; position: relative; }
+  .load-sticky {
+    position: sticky; top: 0;
+    min-height: 100svh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .load-inner { text-align: center; width: 100%; padding: 0 16px; }
+  .load-head { margin-bottom: 8vh; }
+  .load-weight {
+    font: 700 clamp(96px, 22vw, 260px)/0.85 var(--disp);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+    margin-bottom: 2vh;
+  }
+  .load-weight small {
+    font-size: 0.32em; color: var(--faint);
+    font-weight: 600; letter-spacing: 0.04em;
+  }
+  .load-caption { font: 500 12px var(--mono); letter-spacing: 2px; text-transform: uppercase; color: var(--mut); }
+
+  .bar-row {
+    display: flex; align-items: center; justify-content: center;
+    height: clamp(64px, 12vw, 130px);
+  }
+  .sleeve {
+    flex: none; width: clamp(22px, 4vw, 46px); aspect-ratio: 1;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #3A4147, #262C30);
+  }
+  .collar {
+    flex: none; width: clamp(5px, 1vw, 10px); height: clamp(30px, 5.5vw, 58px);
+    border-radius: 4px; background: #454D53;
+    margin: 0 clamp(3px, 0.6vw, 7px);
+  }
+  .bar-mid {
+    flex: 1; max-width: min(340px, 38vw); height: clamp(12px, 2.2vw, 23px);
+    border-radius: 99px;
+    background: linear-gradient(180deg, #4A5560, #333B42);
+  }
+  .stack { display: flex; align-items: center; }
+  .stack.left { flex-direction: row-reverse; }
+  .stack.right { flex-direction: row; }
+  .stack .plate {
+    flex: none; border-radius: clamp(3px, 0.7vw, 9px);
+    transition: clip-path 400ms cubic-bezier(0.2, 0.8, 0.25, 1), opacity 300ms ease;
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  .stack.left .plate { clip-path: inset(0 0 0 100%); }
+  .stack .plate.on { clip-path: inset(0 0 0 0); opacity: 1; }
+  /* Größen skalieren mit dem Viewport */
+  .p25 { width: clamp(17px, 3.4vw, 35px); height: clamp(54px, 10.5vw, 110px); background: var(--plate25); }
+  .p20 { width: clamp(14px, 2.9vw, 30px); height: clamp(47px, 9vw, 95px);  background: var(--plate20); }
+  .p15 { width: clamp(12px, 2.4vw, 25px); height: clamp(40px, 7.7vw, 81px); background: var(--plate15); }
+  .p10 { width: clamp(9px, 1.9vw, 20px); height: clamp(33px, 6.4vw, 67px); background: var(--plate10); }
+  .p5  { width: clamp(6px, 1.3vw, 14px); height: clamp(25px, 4.8vw, 51px); background: var(--plate5); }
+
+  .pr-flash {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 55%, rgba(220,169,46,0.10), transparent 70%);
+    opacity: 0; transition: opacity 600ms ease;
+    pointer-events: none;
+  }
+  .load-section.maxed .pr-flash { opacity: 1; }
+
+  /* ── App-Demo: Phone mit Scheibenrechner ──────────────── */
+  .demo-grid {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 64px; align-items: center;
+  }
+  @media (max-width: 900px) {
+    .demo-grid { grid-template-columns: 1fr; gap: 24px; }
+    .demo-phone { margin: 40px auto 0; }
+  }
+
+  .phone {
+    width: min(340px, 88vw);
+    border-radius: 52px;
+    border: 1px solid #23282B;
+    background: #07090B;
+    padding: 10px;
+    box-shadow: 0 48px 96px -36px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .screen {
+    border-radius: 42px;
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    overflow: hidden;
+  }
+  .notch {
+    width: 96px; height: 24px; border-radius: 99px;
+    background: #000; margin: 10px auto 0;
+  }
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 24px 0;
+    font: 500 12px var(--mono); color: var(--text-dim);
+  }
+  .demo-body { padding: 14px 16px 22px; }
+  .demo-body .head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 6px 2px 12px;
+  }
+
+  .weight-card {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    padding: 14px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .wnum { font: 700 46px/1 var(--disp); font-variant-numeric: tabular-nums; }
+  .wnum small { font-size: 18px; color: var(--faint); font-weight: 600; letter-spacing: 0.04em; }
+  .stepper { display: flex; gap: 8px; }
+  .stepper button {
+    width: 46px; height: 46px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--raised);
+    color: var(--text);
+    font: 600 22px/1 var(--body);
+    cursor: pointer;
+    transition: border-color 160ms ease, transform 160ms ease;
+  }
+  .stepper button:hover { border-color: #3A4147; transform: translateY(-1px); }
+  .stepper button:active { transform: translateY(0); opacity: 0.82; }
+
+  .rng {
+    -webkit-appearance: none; appearance: none;
+    display: block; width: 100%; height: 4px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--plate25) 0%, var(--plate25) 30%, var(--line) 30%);
+    margin: 20px 0 4px;
+    cursor: pointer;
+  }
+  .rng::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--plate25);
+    border: 4px solid var(--raised);
+    box-shadow: 0 2px 10px rgba(214,59,52,0.45);
+  }
+  .rng::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--plate25);
+    border: 4px solid var(--raised);
+  }
+  .rng-scale {
+    display: flex; justify-content: space-between;
+    font: 400 10px var(--mono); color: var(--faint);
+  }
+
+  .bar-card {
+    margin-top: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    padding: 20px 10px 14px;
+    overflow: hidden;
+  }
+  .phone .bar-row { height: 92px; }
+  .phone .sleeve { width: 20px; border-radius: 4px; }
+  .phone .collar { width: 5px; height: 32px; margin: 0 2px; border-radius: 3px; }
+  .phone .bar-mid { max-width: 56px; height: 10px; }
+  .phone .stack .plate {
+    clip-path: inset(0 100% 0 0); opacity: 0;
+    transform: translateY(-6px);
+    transition: clip-path 260ms cubic-bezier(0.2, 0.8, 0.25, 1), opacity 200ms ease, transform 260ms ease;
+  }
+  .phone .stack.left .plate { clip-path: inset(0 0 0 100%); }
+  .phone .stack .plate.on { clip-path: inset(0); opacity: 1; transform: none; }
+  .side-note {
+    margin-top: 10px; text-align: center;
+    font: 500 10px var(--mono); letter-spacing: 1px; text-transform: uppercase;
+    color: var(--mut);
+  }
+
+  /* ── Sektionen ────────────────────────────────────────── */
+  section.pad { padding: 96px 0; border-top: 1px solid var(--line-soft); }
+
+  /* Scroll-Reveal */
+  .rv {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.3, 1), transform 700ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .rv.in { opacity: 1; transform: none; }
+  .rv.d1 { transition-delay: 90ms; } .rv.d2 { transition-delay: 180ms; } .rv.d3 { transition-delay: 270ms; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; margin-top: 44px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    padding: 26px 24px;
+    transition: border-color 240ms ease, transform 240ms ease;
+  }
+  .card:hover { border-color: var(--line); transform: translateY(-4px); }
+  .card h3 {
+    font: 600 21px/1.15 var(--disp);
+    letter-spacing: 0.03em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .card p { color: var(--mut); font-size: 15px; line-height: 1.55; text-wrap: pretty; }
+  .tag {
+    display: inline-block;
+    font: 500 10px var(--mono); letter-spacing: 1px; text-transform: uppercase;
+    border-radius: 4px; padding: 4px 8px; margin-bottom: 14px;
+  }
+  .c-red .tag    { color: var(--tint-action); background: rgba(214,59,52,0.16); }
+  .c-blue .tag   { color: var(--tint-info);   background: rgba(53,103,206,0.18); }
+  .c-yellow .tag { color: var(--tint-effort); background: rgba(220,169,46,0.14); }
+  .c-green .tag  { color: var(--tint-success);background: rgba(55,154,91,0.16); }
+
+  /* Scheibenlegende */
+  .legend {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px; margin-top: 44px;
+  }
+  .chip {
+    background: var(--surface); border: 1px solid var(--line-soft);
+    border-radius: 10px; padding: 16px;
+    display: flex; align-items: center; gap: 12px;
+    transition: transform 200ms ease, border-color 200ms ease;
+  }
+  .chip:hover { transform: translateY(-3px); border-color: var(--line); }
+  .chip i { flex: none; width: 22px; height: 44px; border-radius: 6px; display: block; }
+  .chip .kg { font: 600 21px/1 var(--disp); font-variant-numeric: tabular-nums; }
+  .chip .lb { font: 400 11px var(--mono); color: var(--faint); margin-top: 4px; }
+
+  /* Stats mit Count-up */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px; margin-top: 44px;
+  }
+  .stat { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 14px; padding: 22px 20px; }
+  .stat b { display: block; font: 700 52px/1 var(--disp); font-variant-numeric: tabular-nums; }
+  .stat span { font: 500 10px var(--mono); letter-spacing: 1px; text-transform: uppercase; color: var(--mut); display: block; margin-top: 10px; }
+
+  /* ── CTA / Footer ─────────────────────────────────────── */
+  .cta-box {
+    background:
+      radial-gradient(ellipse 80% 90% at 50% 115%, rgba(214,59,52,0.14), transparent 65%),
+      var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 20px;
+    padding: clamp(40px, 7vw, 72px) 32px;
+    text-align: center;
+  }
+  .cta-box h2 { margin-bottom: 8px; }
+  .cta-box .hero-cta { justify-content: center; animation: none; opacity: 1; }
+  .cta-note { margin-top: 16px; font: 400 11px var(--mono); color: var(--faint); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  footer { border-top: 1px solid var(--line-soft); padding: 40px 0 56px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
+  footer p, footer a { font: 400 12px/1.8 var(--mono); color: var(--faint); }
+  footer a { color: var(--mut); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .reveal-line > span, .hero p.lead, .hero-cta { opacity: 1 !important; transform: none !important; }
+    .rv { opacity: 1; transform: none; }
+    .stack .plate { clip-path: none; opacity: 1; }
+    .load-section { height: auto; }
+    .load-sticky { position: static; min-height: auto; padding: 96px 0; }
+  }
 </style>
-<main>
-  <h1>Overload</h1>
-  <p>Trainings-Tracker für Kraftsport. Offline-first, alles auf dem Gerät.</p>
-  <p>
-    Diese Seite trägt die OAuth-Identität der App:
-    <a href="oauth-client-metadata.json">oauth-client-metadata.json</a>. Bluesky holt das Dokument
-    beim Anmelden ab, um zu prüfen, welche Rechte Overload erfragt &mdash; Likes, Kommentare und
-    Lesezugriff auf den Feed, sonst nichts.
-  </p>
-  <p><code>github.com/wakahuula/overload-site</code></p>
-</main>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="Overload">
+      <span class="logo" role="img" aria-hidden="true"><span class="w">Over</span><span class="w">Load</span><span class="bars"><i></i><i></i><i></i><i></i></span></span>
+    </a>
+    <div class="links">
+      <a href="#prinzip" class="hide-sm">Prinzip</a>
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#download">Download</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="kicker">Offline-first · Alles auf dem Gerät</span>
+    <h1>
+      <span class="reveal-line"><span>Mehr Gewicht.</span></span>
+      <span class="reveal-line"><span><em>Jede Woche.</em></span></span>
+    </h1>
+    <p class="lead">
+      Overload ist der Workout-Tracker für Kraftsport. Kein Konto, kein Cloud-Zwang,
+      keine Ablenkung zwischen den Sätzen. Nur du, die Stange und die Zahl, die nächste Woche höher steht.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-action" href="#download">App laden</a>
+      <a class="btn btn-ghost" href="#prinzip">Das Prinzip</a>
+    </div>
+  </div>
+  <span class="scroll-hint">Scrollen</span>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <b class="mq-red">Progressive Overload</b><small>●</small>
+    <b class="mq-white">Offline-first</b><small>●</small>
+    <b class="mq-blue">Kraftsport</b><small>●</small>
+    <b class="mq-green">Neue Rekorde</b><small>●</small>
+    <b class="mq-yellow">Kein Ballast</b><small>●</small>
+  </div>
+  <div class="marquee-track">
+    <b class="mq-red">Progressive Overload</b><small>●</small>
+    <b class="mq-white">Offline-first</b><small>●</small>
+    <b class="mq-blue">Kraftsport</b><small>●</small>
+    <b class="mq-green">Neue Rekorde</b><small>●</small>
+    <b class="mq-yellow">Kein Ballast</b><small>●</small>
+  </div>
+</div>
+
+<section class="load-section" id="prinzip">
+  <div class="pr-flash"></div>
+  <div class="load-sticky">
+    <div class="load-inner">
+      <div class="load-head">
+        <span class="mono-label">Das Prinzip</span>
+        <h2 style="margin-bottom:0">Scroll = Trainieren.</h2>
+      </div>
+
+      <div class="bar-row" aria-hidden="true">
+        <span class="sleeve"></span><span class="collar"></span>
+        <span class="stack left"><i class="plate p25"></i><i class="plate p25"></i><i class="plate p20"></i><i class="plate p15"></i><i class="plate p10"></i><i class="plate p5"></i></span>
+        <span class="bar-mid"></span>
+        <span class="stack right"><i class="plate p25"></i><i class="plate p25"></i><i class="plate p20"></i><i class="plate p15"></i><i class="plate p10"></i><i class="plate p5"></i></span>
+        <span class="collar"></span><span class="sleeve"></span>
+      </div>
+
+      <div class="load-weight"><span id="kg">20</span><small>&nbsp;KG</small></div>
+      <div class="load-caption" id="load-msg">Leere Stange · 20 kg</div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="app">
+  <div class="wrap">
+    <div class="demo-grid">
+      <div>
+        <span class="mono-label rv">Live-Demo</span>
+        <h2 class="rv">Gib dein<br />Gewicht ein.</h2>
+        <p class="lead rv">
+          Genau so fühlt sich Overload an: Stangengewicht einstellen, fertig.
+          Die App rechnet dir jede Last auf die Scheiben herunter — mit dem
+          Farbcode deiner Plattform, sofort und offline.
+        </p>
+        <div class="hero-cta rv d1" style="opacity:1;animation:none">
+          <a class="btn btn-ghost" href="#download">Alle Features ansehen</a>
+        </div>
+      </div>
+
+      <div class="demo-phone rv d1">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch" aria-hidden="true"></div>
+            <div class="statusbar"><span id="demo-time">21:12</span><span>OVERLOAD</span></div>
+            <div class="demo-body">
+              <div class="head">
+                <span class="mono-label">Hantel laden</span>
+                <span class="mono-label" style="color:var(--tint-success)">Offline</span>
+              </div>
+
+              <div class="weight-card">
+                <div class="wnum"><span id="demo-kg">100</span><small>&nbsp;KG</small></div>
+                <div class="stepper">
+                  <button type="button" id="demo-minus" aria-label="2,5 kg weniger">−</button>
+                  <button type="button" id="demo-plus" aria-label="2,5 kg mehr">+</button>
+                </div>
+              </div>
+
+              <input class="rng" type="range" id="demo-range" min="20" max="220" step="2.5" value="100" aria-label="Gewicht in Kilogramm" />
+              <div class="rng-scale"><span>20</span><span>120</span><span>220 KG</span></div>
+
+              <div class="bar-card">
+                <div class="bar-row" aria-hidden="true">
+                  <span class="sleeve"></span><span class="collar"></span>
+                  <span class="stack left" id="demo-left"></span>
+                  <span class="bar-mid"></span>
+                  <span class="stack right" id="demo-right"></span>
+                  <span class="collar"></span><span class="sleeve"></span>
+                </div>
+                <div class="side-note" id="demo-note">Pro Seite 40 kg · 2 Scheiben</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="features">
+  <div class="wrap">
+    <span class="mono-label rv">Features</span>
+    <h2 class="rv">Kein Ballast.<br />Nur Training.</h2>
+    <p class="lead rv">Overload verzichtet auf alles, was dich vom Satz unter der Stange abhält. Was bleibt, funktioniert — online wie offline.</p>
+
+    <div class="grid">
+      <div class="card c-red rv">
+        <span class="tag">Tracker</span>
+        <h3>Sätze, Wdh., Gewicht</h3>
+        <p>Schnell erfasst zwischen den Sätzen. Tabellarische Zahlen, große Ziele, nichts drei Menüs tief.</p>
+      </div>
+      <div class="card c-blue rv d1">
+        <span class="tag">Fortschritt</span>
+        <h3>Progressiver Overload</h3>
+        <p>Jede Session wird mit deiner Historie verglichen. Neue Bestzeit? Overload zeigt dir sofort, dass du stärker geworden bist.</p>
+      </div>
+      <div class="card c-yellow rv d2">
+        <span class="tag">Programme</span>
+        <h3>Pläne &amp; Bibliothek</h3>
+        <p>Vorgefertigte Programme oder dein eigener Plan. Übungs­bibliothek mit den Basics von Kraftdreikampf und Gewichtheben.</p>
+      </div>
+      <div class="card c-green rv d3">
+        <span class="tag">Bluesky</span>
+        <h3>Rekorde, dir gehören</h3>
+        <p>Optional schreibt Overload jeden Rekord in dein eigenes Bluesky-Datenlager — nicht auf unsere Server. Deine Daten, deine Regeln.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="system">
+  <div class="wrap">
+    <span class="mono-label rv">Das Scheibensystem</span>
+    <h2 class="rv">Farbcode wie<br />auf der Plattform.</h2>
+    <p class="lead rv">Jedes Gewicht hat seine Farbe — von der 25er bis zur 5er-Scheibe. In der App markiert der Code Buttons, Balken und Bestleistungen.</p>
+
+    <div class="legend">
+      <div class="chip rv"><i style="background:#D63B34"></i><div><div class="kg">25 kg</div><div class="lb">55 LB · ROT</div></div></div>
+      <div class="chip rv d1"><i style="background:#3567CE"></i><div><div class="kg">20 kg</div><div class="lb">45 LB · BLAU</div></div></div>
+      <div class="chip rv d2"><i style="background:#DCA92E"></i><div><div class="kg">15 kg</div><div class="lb">35 LB · GELB</div></div></div>
+      <div class="chip rv d1"><i style="background:#379A5B"></i><div><div class="kg">10 kg</div><div class="lb">25 LB · GRÜN</div></div></div>
+      <div class="chip rv d2"><i style="background:#E6E6E0"></i><div><div class="kg">5 kg</div><div class="lb">10 LB · WEISS</div></div></div>
+      <div class="chip rv d3"><i style="background:#0B0D0F;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14)"></i><div><div class="kg">2,5 kg</div><div class="lb">5 LB · SCHWARZ</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="zahlen">
+  <div class="wrap">
+    <span class="mono-label rv">Warum offline-first?</span>
+    <h2 class="rv">Dein Gym hat kein<br />WLAN. Egal.</h2>
+    <p class="lead rv">Overload läuft komplett auf dem Gerät. Keine Anmeldung, keine Sync-Warteschleife, kein Datenverlust im Keller-Studio.</p>
+
+    <div class="stats">
+      <div class="stat rv"><b data-count="0" data-suffix="">0</b><span>Konto erforderlich</span></div>
+      <div class="stat rv d1"><b data-count="100" data-suffix="%">0%</b><span>Daten auf dem Gerät</span></div>
+      <div class="stat rv d2"><b data-count="1" data-prefix="&lt;&nbsp;" data-suffix="&nbsp;s">&lt; 1 s</b><span>Zum nächsten Satz</span></div>
+      <div class="stat rv d3"><b data-count="1">0</b><span>App für alles</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="download">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <span class="logo" style="--lw: 34px; --lg: 4px" role="img" aria-label="Overload Logo"><span class="w">Over</span><span class="w">Load</span><span class="bars"><i></i><i></i><i></i><i></i></span></span>
+      <h2 style="margin-top:20px">Lad die Stange auf.</h2>
+      <div class="hero-cta">
+        <a class="btn btn-action" href="#">App laden</a>
+        <a class="btn btn-ghost" href="https://github.com/wakahuula/overload-site">GitHub</a>
+      </div>
+      <div class="cta-note">Ohne Verbindung läuft alles weiter — nur lokal.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Overload · Kraftsport-Tracker</p>
+    <p><a href="https://github.com/wakahuula/overload-site">github.com/wakahuula/overload-site</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Nav-Kante ab erstem Scroll
+  var nav = document.getElementById('nav');
+  addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', scrollY > 8);
+  }, { passive: true });
+
+  // Scroll-Reveal
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+
+    // Count-up für Stats
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        cio.unobserve(e.target);
+        var el = e.target, end = +el.dataset.count;
+        var pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+        var t0 = performance.now();
+        (function tick(t) {
+          var p = Math.min((t - t0) / 900, 1);
+          el.innerHTML = pre + Math.round(end * (1 - Math.pow(1 - p, 3))) + suf;
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+  } else {
+    document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Beladungs-Story: Hantel lädt sich beim Scrollen auf
+  var section = document.querySelector('.load-section');
+  var kgEl = document.getElementById('kg');
+  var msgEl = document.getElementById('load-msg');
+  var plates = Array.prototype.slice.call(document.querySelectorAll('.stack .plate'));
+  // pro Paar: Gewichtszuwachs (beide Seiten) & Beschriftung
+  var steps = [
+    { add: 50, msg: 'Zwei 25er drauf' },
+    { add: 50, msg: 'Noch zwei 25er' },
+    { add: 40, msg: 'Zwei 20er folgen' },
+    { add: 30, msg: 'Zwei 15er drauf' },
+    { add: 20, msg: 'Zwei 10er drauf' },
+    { add: 10, msg: 'Zwei 5er — vollbeladen' },
+  ];
+  var BAR = 20;
+
+  function updateLoad() {
+    var rect = section.getBoundingClientRect();
+    var total = rect.height - innerHeight;
+    var p = Math.min(Math.max(-rect.top / total, 0), 1);
+
+    var n = Math.floor(p * 6);           // Anzahl beladener Paare
+    var frac = p * 6 - n;                // Zwischenwert für sanfte Zahl
+
+    var kg = BAR, acc = BAR;
+    for (var i = 0; i < 6; i++) {
+      var target = acc + steps[i].add;
+      kg += (i < n ? steps[i].add : i === n ? steps[i].add * frac : 0);
+      acc = target;
+    }
+    plates.forEach(function (pl, idx) {
+      pl.classList.toggle('on', idx % 6 < n || (idx % 6 === n && frac > 0.4));
+    });
+
+    kgEl.textContent = Math.round(kg * 2) / 2 === Math.round(kg)
+      ? Math.round(kg) : kg.toFixed(1).replace('.', ',');
+    msgEl.textContent = n === 0 && frac < 0.05
+      ? 'Leere Stange · 20 kg'
+      : n >= 6 ? '220 KG · PERSONAL RECORD' : steps[Math.min(n, 5)].msg.toUpperCase();
+    section.classList.toggle('maxed', p > 0.97);
+  }
+
+  if (reduced) {
+    plates.forEach(function (pl) { pl.classList.add('on'); });
+    kgEl.textContent = '220';
+    msgEl.textContent = '220 KG · PERSONAL RECORD';
+    section.classList.add('maxed');
+  } else {
+    addEventListener('scroll', updateLoad, { passive: true });
+    addEventListener('resize', updateLoad);
+    updateLoad();
+  }
+  // Live-Demo: Scheibenrechner im Phone
+  var DEMO_PLATES = [
+    { kg: 25,   color: '#D63B34' },
+    { kg: 20,   color: '#3567CE' },
+    { kg: 15,   color: '#DCA92E' },
+    { kg: 10,   color: '#379A5B' },
+    { kg: 5,    color: '#E6E6E0' },
+    { kg: 2.5,  color: '#0B0D0F' },
+    { kg: 1.25, color: '#5A6169' },
+  ];
+  var dKg = document.getElementById('demo-kg');
+  var dRange = document.getElementById('demo-range');
+  var dNote = document.getElementById('demo-note');
+  var dLeft = document.getElementById('demo-left');
+  var dRight = document.getElementById('demo-right');
+
+  function calcSide(total) {
+    var rem = Math.round((total - 20) / 2 * 100) / 100;
+    var out = [];
+    DEMO_PLATES.forEach(function (p) {
+      while (rem >= p.kg - 0.001 && out.length < 12) {
+        out.push(p);
+        rem = Math.round((rem - p.kg) * 100) / 100;
+      }
+    });
+    return out;
+  }
+
+  function renderDemo() {
+    var total = +dRange.value;
+    var sidePlates = calcSide(total);
+
+    dKg.textContent = String(+total.toFixed(1)).replace('.', ',');
+    dRange.style.background =
+      'linear-gradient(90deg, #D63B34 0%, #D63B34 ' +
+      ((total - 20) / 200 * 100).toFixed(1) + '%, #282F34 ' +
+      ((total - 20) / 200 * 100).toFixed(1) + '%, #282F34 100%)';
+
+    function build(stack, animate) {
+      stack.innerHTML = '';
+      sidePlates.forEach(function (p, i) {
+        var el = document.createElement('i');
+        el.className = 'plate on';
+        el.style.background = p.color;
+        el.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.10)';
+        el.style.width = (3.5 + p.kg * 0.52).toFixed(1) + 'px';
+        el.style.height = (14 + p.kg * 1.95).toFixed(1) + 'px';
+        if (!reduced && animate && i >= sidePlates.length - 3) {
+          el.classList.remove('on');
+          setTimeout(function () { el.classList.add('on'); }, i * 70);
+        }
+        stack.appendChild(el);
+      });
+    }
+    build(dRight, true);
+    build(dLeft, false);
+
+    dNote.textContent = 'Pro Seite ' +
+      ((total - 20) / 2).toFixed(2).replace('.', ',').replace(/,?00$/, '').replace(/(,\d)0$/, '$1') +
+      ' kg · ' + sidePlates.length + (sidePlates.length === 1 ? ' Scheibe' : ' Scheiben');
+  }
+
+  // Statusbar-Uhr: aktuelle Zeit, Minute für Minute
+  var dTime = document.getElementById('demo-time');
+  function tickClock() {
+    var now = new Date();
+    dTime.textContent =
+      String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+  }
+  tickClock();
+  setInterval(tickClock, 10000);
+
+  document.getElementById('demo-minus').addEventListener('click', function () {
+    dRange.value = Math.max(20, +dRange.value - 2.5); renderDemo();
+  });
+  document.getElementById('demo-plus').addEventListener('click', function () {
+    dRange.value = Math.min(220, +dRange.value + 2.5); renderDemo();
+  });
+  dRange.addEventListener('input', renderDemo);
+  renderDemo();
+})();
+</script>
+
+</body>
+</html>
