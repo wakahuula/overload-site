@@ -1,0 +1,204 @@
+/**
+ * Design-Tokens der Website. Quelle ist 1:1
+ * Powerful/src/shared/theme.ts (Overload Design System v1.0).
+ *
+ * Dunkel ist die Referenzpalette. Hell kehrt die Flächen-Skala um und dunkelt
+ * nur die Text-Tints ab, damit sie auf Weiß AA halten. Der Scheibencode bleibt
+ * als Fläche in beiden Paletten gleich.
+ */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0f0f14;
+  --surface: #18181f;
+  --raised: #212129;
+  --line: #2b2b36;
+  --line-soft: #23232c;
+  --text: #efeff2;
+  --mut: #8f8f9d;
+  --faint: #8d8d9b;
+  --text-dim: #c7c7cb;
+  --text-dim-soft: #bbbbc8;
+
+  --action: #d63b34;
+  --info: #3567ce;
+  --effort: #dca92e;
+  --success: #379a5b;
+  --plate-5: #e6e6e0;
+  --plate-neutral: #5d5d6b;
+
+  /* IPF-Scheibencode als eigene Namen für den Rechner. */
+  --plate-25: #d63b34;
+  --plate-20: #3567ce;
+  --plate-15: #dca92e;
+  --plate-10: #379a5b;
+
+  --tint-action: #f0837d;
+  --tint-info: #8faef0;
+  --tint-effort: #e5c46a;
+  --tint-success: #7cc79a;
+
+  --tint-bg-action: rgba(214, 59, 52, 0.16);
+  --tint-bg-info: rgba(53, 103, 206, 0.18);
+  --tint-bg-effort: rgba(220, 169, 46, 0.14);
+  --tint-bg-success: rgba(55, 154, 91, 0.16);
+
+  --border-active: #3d3d49;
+  --border-fail: rgba(214, 59, 52, 0.45);
+  --success-wash: rgba(55, 154, 91, 0.1);
+  --effort-wash: rgba(220, 169, 46, 0.06);
+  --effort-edge: rgba(220, 169, 46, 0.4);
+  --effort-glow: rgba(220, 169, 46, 0.12);
+
+  --code-bg: #14141b;
+  --code-ink: #cdcddb;
+  --bar-fill: #4f4f62;
+  --sleeve-top: #3d3d49;
+  --sleeve-bottom: #292932;
+  --collar: #494955;
+  --cover-base: #121217;
+  --cover-ink: #25252e;
+  --thumb-base: #16161f;
+
+  --on-action: #ffffff;
+  --on-plate-5: #0b0b10;
+  --shadow-ink: #000000;
+  --shadow-soft: rgba(0, 0, 0, 0.45);
+  --scrim: rgba(14, 17, 19, 0.8);
+  --scrim-soft: rgba(14, 17, 19, 0.45);
+  --plate-shade: rgba(0, 0, 0, 0.35);
+  --tabbar-shadow: rgba(0, 0, 0, 0.4);
+
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --r-chip: 6px;
+  --r-badge: 4px;
+  --r-row: 10px;
+  --r-cta: 12px;
+  --r-card: 14px;
+  --r-sheet: 20px;
+  --r-round: 999px;
+
+  --sp-xs: 4px;
+  --sp-s: 8px;
+  --sp-m: 12px;
+  --sp-l: 16px;
+  --sp-inset: 18px;
+  --sp-xl: 24px;
+  --sp-xxl: 32px;
+
+  --dur-instant: 80ms;
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 360ms;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --maxw: 1120px;
+  --nav-h: 64px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f2f2f6;
+  --surface: #fcfcfe;
+  --raised: #ffffff;
+  --line: #dedee5;
+  --line-soft: #e9e9ef;
+  --text: #1a1a20;
+  --mut: #63636e;
+  --faint: #6e6e7a;
+  --text-dim: #45454e;
+  --text-dim-soft: #55555f;
+
+  --plate-5: #b8b8b0;
+  --plate-neutral: #8a8a96;
+
+  --tint-action: #c0332a;
+  --tint-info: #2b57af;
+  --tint-effort: #85610a;
+  --tint-success: #25784a;
+
+  --tint-bg-action: rgba(214, 59, 52, 0.1);
+  --tint-bg-info: rgba(53, 103, 206, 0.1);
+  --tint-bg-effort: rgba(220, 169, 46, 0.16);
+  --tint-bg-success: rgba(55, 154, 91, 0.12);
+
+  --border-active: #b9b9c6;
+  --border-fail: rgba(214, 59, 52, 0.5);
+  --success-wash: rgba(55, 154, 91, 0.1);
+  --effort-wash: rgba(220, 169, 46, 0.08);
+  --effort-edge: rgba(220, 169, 46, 0.45);
+  --effort-glow: rgba(220, 169, 46, 0.18);
+
+  --code-bg: #f1f1f5;
+  --code-ink: #3a3a44;
+  --bar-fill: #c9c9d4;
+  --sleeve-top: #dcdce2;
+  --sleeve-bottom: #c9c9d3;
+  --collar: #c2c2cc;
+  --cover-base: #e7e7ed;
+  --cover-ink: #33333d;
+  --thumb-base: #eeeef3;
+
+  --on-plate-5: #1a1a20;
+  --shadow-soft: rgba(20, 20, 30, 0.18);
+  --scrim: rgba(15, 15, 20, 0.42);
+  --scrim-soft: rgba(15, 15, 20, 0.24);
+  --plate-shade: rgba(0, 0, 0, 0.18);
+  --tabbar-shadow: rgba(20, 20, 30, 0.14);
+}
+
+/* Ohne JavaScript folgt die Palette der Systemeinstellung. Mit JavaScript
+   setzt das Inline-Skript data-theme, dann greift der Block oben. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+
+    --bg: #f2f2f6;
+    --surface: #fcfcfe;
+    --raised: #ffffff;
+    --line: #dedee5;
+    --line-soft: #e9e9ef;
+    --text: #1a1a20;
+    --mut: #63636e;
+    --faint: #6e6e7a;
+    --text-dim: #45454e;
+    --text-dim-soft: #55555f;
+    --plate-5: #b8b8b0;
+    --plate-neutral: #8a8a96;
+    --tint-action: #c0332a;
+    --tint-info: #2b57af;
+    --tint-effort: #85610a;
+    --tint-success: #25784a;
+    --tint-bg-action: rgba(214, 59, 52, 0.1);
+    --tint-bg-info: rgba(53, 103, 206, 0.1);
+    --tint-bg-effort: rgba(220, 169, 46, 0.16);
+    --tint-bg-success: rgba(55, 154, 91, 0.12);
+    --border-active: #b9b9c6;
+    --border-fail: rgba(214, 59, 52, 0.5);
+    --success-wash: rgba(55, 154, 91, 0.1);
+    --effort-wash: rgba(220, 169, 46, 0.08);
+    --effort-edge: rgba(220, 169, 46, 0.45);
+    --effort-glow: rgba(220, 169, 46, 0.18);
+    --code-bg: #f1f1f5;
+    --code-ink: #3a3a44;
+    --bar-fill: #c9c9d4;
+    --sleeve-top: #dcdce2;
+    --sleeve-bottom: #c9c9d3;
+    --collar: #c2c2cc;
+    --cover-base: #e7e7ed;
+    --cover-ink: #33333d;
+    --thumb-base: #eeeef3;
+    --on-plate-5: #1a1a20;
+    --shadow-soft: rgba(20, 20, 30, 0.18);
+    --scrim: rgba(15, 15, 20, 0.42);
+    --scrim-soft: rgba(15, 15, 20, 0.24);
+    --plate-shade: rgba(0, 0, 0, 0.18);
+    --tabbar-shadow: rgba(20, 20, 30, 0.14);
+  }
+}
