@@ -164,7 +164,8 @@ h3 {
 
 /* ------------------------------------------------------------- Reveal */
 
-[data-reveal] {
+/* Nur mit JavaScript ausblenden. Ohne JS bleibt alles sichtbar. */
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(26px);
   transition:
@@ -172,15 +173,15 @@ h3 {
     transform 800ms var(--ease-out);
 }
 
-[data-reveal].is-in {
+.js [data-reveal].is-in {
   opacity: 1;
   transform: none;
 }
 
-[data-reveal][data-delay='1'] { transition-delay: 90ms; }
-[data-reveal][data-delay='2'] { transition-delay: 180ms; }
-[data-reveal][data-delay='3'] { transition-delay: 270ms; }
-[data-reveal][data-delay='4'] { transition-delay: 360ms; }
+.js [data-reveal][data-delay='1'] { transition-delay: 90ms; }
+.js [data-reveal][data-delay='2'] { transition-delay: 180ms; }
+.js [data-reveal][data-delay='3'] { transition-delay: 270ms; }
+.js [data-reveal][data-delay='4'] { transition-delay: 360ms; }
 
 /* ---------------------------------------------------------------- Nav */
 
@@ -902,7 +903,7 @@ h3 {
 
 .prog-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
   gap: 10px;
 }
 
@@ -1159,9 +1160,14 @@ h3 {
 
 .balance-fill {
   height: 100%;
-  width: 0;
+  width: var(--w, 0);
   border-radius: var(--r-round);
   transition: width 1100ms var(--ease-out);
+}
+
+/* Mit JavaScript starten die Balken bei null und wachsen beim Scrollen. */
+.js .balance-fill {
+  width: 0;
 }
 
 .balance-fill.push { background: var(--info); }
@@ -1428,6 +1434,53 @@ h3 {
   gap: 6px 16px;
 }
 
+.footer-note {
+  flex-basis: 100%;
+}
+
+/* ---------------------------------------------- Detail: Phone-Hantel */
+
+.phone .bar-sleeve {
+  width: 20px;
+}
+
+.phone .bar-collar {
+  width: 5px;
+  height: 32px;
+  margin: 0 2px;
+}
+
+.phone .bar-shaft {
+  max-width: 56px;
+  height: 10px;
+}
+
+/* --------------------------------------------------- Theme-Schalter */
+
+.theme-icon-light {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-icon-dark {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-icon-light {
+  display: block;
+}
+
+/* ------------------------------------------------ Progressions-Bump */
+
+@keyframes bump {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.prog-card.is-bump {
+  animation: bump var(--dur-slow) var(--ease-out);
+}
+
 /* ------------------------------------------------------ Responsive */
 
 @media (max-width: 960px) {
@@ -1495,10 +1548,6 @@ h3 {
     grid-template-columns: 1fr 1fr;
   }
 
-  .prog-stat:last-child {
-    grid-column: span 2;
-  }
-
   .hero-cta .btn {
     flex: 1 1 auto;
   }
@@ -1523,7 +1572,7 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 
-  [data-reveal] {
+  .js [data-reveal] {
     opacity: 1;
     transform: none;
   }
