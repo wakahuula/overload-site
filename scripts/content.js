@@ -175,7 +175,7 @@ export const content = {
     'faq.title': 'Kurz beantwortet.',
     'faq.q1': 'Ist Overload kostenlos?',
     'faq.a1':
-      'Ja. Logging, Programme, Analyse und Export sind kostenlos gedacht. Ein Preis käme erst für Netzfunktionen wie Sync in Frage, nicht für die Basics.',
+      'Ja. Logging, Programme und Export sind kostenlos gedacht. Ein Preis käme erst für Netz- und Zusatzfunktionen wie Sync, adaptive Steuerung oder erweiterte Analyse in Frage, nicht für die Basics.',
     'faq.q2': 'Wohin gehen meine Daten?',
     'faq.a2':
       'Nirgendwohin. Overload speichert alles lokal in einer Datenbank auf dem Gerät. Für das Training macht die App keine Netzwerkanfrage.',
@@ -187,7 +187,7 @@ export const content = {
       'Ja. Du exportierst deine Historie als CSV und deine Programme als CAR-Datei. Der Import liest Strong, Hevy, JEFIT, FitNotes und Boostcamp.',
     'faq.q5': 'Funktioniert es ohne Empfang?',
     'faq.a5':
-      'Ja. Keine Funktion braucht eine Verbindung. Training, Analyse und Export laufen offline.',
+      'Ja. Training, Analyse und Export laufen offline. Nur der optionale Bluesky-Feed braucht eine Verbindung.',
     'faq.q6': 'Was macht die Bluesky-Verbindung?',
     'faq.a6':
       'Sie ist optional und zeigt deinen Bluesky-Feed im Profil. Du meldest dich mit einem App-Passwort an; deine Trainingsdaten bleiben davon getrennt.',
@@ -373,7 +373,7 @@ export const content = {
     'faq.title': 'Short answers.',
     'faq.q1': 'Is Overload free?',
     'faq.a1':
-      'Yes. Logging, programs, analysis and export are meant to be free. A price would only come for network features like sync, not for the basics.',
+      'Yes. Logging, programs and export are meant to be free. A price would only come for network and extra features such as sync, adaptive control or advanced analysis, not for the basics.',
     'faq.q2': 'Where does my data go?',
     'faq.a2':
       'Nowhere. Overload stores everything locally in a database on your device. For training, the app makes no network request.',
@@ -385,7 +385,7 @@ export const content = {
       'Yes. You export your history as CSV and your programs as a CAR file. The import reads Strong, Hevy, JEFIT, FitNotes and Boostcamp.',
     'faq.q5': 'Does it work without a signal?',
     'faq.a5':
-      'Yes. No feature needs a connection. Training, analysis and export all run offline.',
+      'Yes. Training, analysis and export run offline. Only the optional Bluesky feed needs a connection.',
     'faq.q6': 'What does the Bluesky connection do?',
     'faq.a6':
       'It is optional and shows your Bluesky feed in your profile. You sign in with an app password, and your training data stays separate from it.',

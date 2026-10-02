@@ -96,7 +96,7 @@ git commit -m "feat(site): testbare Scheibenmathematik und Testfundament"
 
 **Interfaces:**
 - Produces:
-  - `SCHEMES: readonly { sets: number, reps: number, percent: number, label: string }[]` (5×3 @ 0.85, 6×2 @ 0.875, 10×1 @ 0.90)
+  - `SCHEMES: readonly { sets: number, reps: number, percent: number, label: string }[]` (5×3, 6×2, 10×1, alle @ 0.85 — die App hält T1 konstant und ändert nur Sätze/Wiederholungen)
   - `roundToPlate(valueKg: number, step?: number): number` (Default 2.5)
   - `workWeight(tm: number, schemeIndex: number): number`
   - `applyWeek(state: { tm: number, schemeIndex: number, increment: number }, success: boolean): { tm, schemeIndex, event: 'increase'|'step'|'reset' }`
@@ -104,7 +104,7 @@ git commit -m "feat(site): testbare Scheibenmathematik und Testfundament"
 
 - [ ] **Step 1: Failing tests schreiben** in `tests/progression.test.js`
 
-Fälle: Erfolg erhöht `tm` um `increment`, `schemeIndex` bleibt; Fehlschlag bei Index 0 → Index 1 (`event 'step'`); bei Index 2 (10×1) → `tm` auf 90 % gerundet und Index 0 (`event 'reset'`); `workWeight(100,0)===85`, `workWeight(100,1)===87.5` (gerundet auf 2,5 → `87.5`), `workWeight(100,2)===90`; `roundToPlate(86.2)===85`.
+Fälle: Erfolg erhöht `tm` um `increment`, `schemeIndex` bleibt; Fehlschlag bei Index 0 → Index 1 (`event 'step'`); bei Index 2 (10×1) → `tm` auf 90 % gerundet und Index 0 (`event 'reset'`); `workWeight(100,0)===85`, `workWeight(100,1)===85`, `workWeight(100,2)===85` (Arbeitsgewicht bleibt die Leiter hinauf konstant); `roundToPlate(86.2)===85`.
 
 - [ ] **Step 2: Tests laufen lassen, Fehlschlag bestätigen**
 

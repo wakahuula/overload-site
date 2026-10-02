@@ -14,8 +14,8 @@ test('die Schema-Leiter ist 5x3, 6x2, 10x1', () => {
     SCHEMES.map((s) => [s.sets, s.reps, s.percent]),
     [
       [5, 3, 0.85],
-      [6, 2, 0.875],
-      [10, 1, 0.9],
+      [6, 2, 0.85],
+      [10, 1, 0.85],
     ],
   );
 });
@@ -28,8 +28,8 @@ test('roundToPlate rundet auf die kleinste Scheibe', () => {
 
 test('workWeight leitet das Arbeitsgewicht aus Training Max und Schema ab', () => {
   assert.equal(workWeight(100, 0), 85);
-  assert.equal(workWeight(100, 1), 87.5);
-  assert.equal(workWeight(100, 2), 90);
+  assert.equal(workWeight(100, 1), 85);
+  assert.equal(workWeight(100, 2), 85);
 });
 
 test('ein erfuelltes Ziel hebt den Training Max', () => {
@@ -58,11 +58,16 @@ test('der Reset rundet auf die kleinste Scheibe', () => {
   assert.equal(next.tm, 95);
 });
 
+test('das Arbeitsgewicht bleibt die Leiter hinauf konstant', () => {
+  assert.equal(workWeight(100, 0), workWeight(100, 1));
+  assert.equal(workWeight(100, 1), workWeight(100, 2));
+});
+
 test('prescription liefert Schema und Arbeitsgewicht zusammen', () => {
   assert.deepEqual(prescription({ tm: 100, schemeIndex: 1 }), {
     sets: 6,
     reps: 2,
-    percent: 0.875,
-    weight: 87.5,
+    percent: 0.85,
+    weight: 85,
   });
 });

@@ -79,6 +79,22 @@ export function apply() {
   const description = document.querySelector('meta[name="description"]');
   if (description) description.setAttribute('content', t('meta.description'));
 
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', t('meta.title'));
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  if (ogDescription) ogDescription.setAttribute('content', t('meta.description'));
+
+  const structured = document.querySelector('script[type="application/ld+json"]');
+  if (structured) {
+    try {
+      const data = JSON.parse(structured.textContent);
+      data.description = t('meta.description');
+      structured.textContent = JSON.stringify(data);
+    } catch {
+      /* Ungültiges JSON-LD bleibt unangetastet. */
+    }
+  }
+
   for (const el of document.querySelectorAll('[data-i18n]')) {
     el.textContent = t(el.dataset.i18n);
   }

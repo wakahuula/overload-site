@@ -94,6 +94,7 @@ function initPrinciple() {
 
   if (reduceMotion) {
     paint(1);
+    document.addEventListener('overload:lang', () => paint(1));
     return;
   }
 

@@ -142,10 +142,10 @@ initFooter();
 initClock();
 initI18n();
 
-if (reduceMotion) {
-  document.documentElement.dataset.motion = 'reduced';
-}
-
 initBarbell();
 initPlateDemo();
 initProgressionDemo();
+
+// Progressive Enhancement bestätigen: Module sind gelaufen, die .js-Klasse bleibt.
+document.documentElement.classList.add('js');
+window.__overloadBooted = true;

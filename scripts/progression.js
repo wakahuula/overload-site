@@ -8,10 +8,13 @@
  * Speicher- oder DOM-Abhängigkeit.
  */
 
+// T1 bleibt bei 85 % des Training Max. Die Leiter senkt nur die
+// Wiederholungen, das Gewicht steht (wie in der App, programs.ts und
+// progression.ts §prescriptionFor).
 export const SCHEMES = Object.freeze([
   Object.freeze({ sets: 5, reps: 3, percent: 0.85, label: '5×3' }),
-  Object.freeze({ sets: 6, reps: 2, percent: 0.875, label: '6×2' }),
-  Object.freeze({ sets: 10, reps: 1, percent: 0.9, label: '10×1' }),
+  Object.freeze({ sets: 6, reps: 2, percent: 0.85, label: '6×2' }),
+  Object.freeze({ sets: 10, reps: 1, percent: 0.85, label: '10×1' }),
 ]);
 
 const DEFAULT_STEP = 2.5;

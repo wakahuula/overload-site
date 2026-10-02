@@ -18,7 +18,6 @@ body {
   color: var(--text);
   font: 400 16px/1.6 var(--font-body);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
   transition:
     background-color var(--dur-base) var(--ease-out),
     color var(--dur-base) var(--ease-out);
@@ -480,7 +479,7 @@ h3 {
 .plate.p10 { width: clamp(9px, 1.8vw, 18px); height: clamp(31px, 5.8vw, 62px); background: var(--plate-10); }
 .plate.p5 { width: clamp(7px, 1.4vw, 14px); height: clamp(24px, 4.4vw, 48px); background: var(--plate-5); }
 
-.bar-stack .plate {
+.js .bar-stack .plate {
   clip-path: inset(0 100% 0 0);
   opacity: 0;
   transition:
@@ -488,11 +487,11 @@ h3 {
     opacity 260ms var(--ease-out);
 }
 
-.bar-stack.left .plate {
+.js .bar-stack.left .plate {
   clip-path: inset(0 0 0 100%);
 }
 
-.bar-stack .plate.is-on {
+.js .bar-stack .plate.is-on {
   clip-path: inset(0 0 0 0);
   opacity: 1;
 }
@@ -920,7 +919,7 @@ h3 {
 
 .btn-success {
   background: var(--success);
-  color: var(--on-action);
+  color: var(--on-plate-5);
 }
 
 .btn-success:hover {
@@ -1069,6 +1068,7 @@ h3 {
 }
 
 .balance-fill {
+  display: block;
   height: 100%;
   width: var(--w, 0);
   border-radius: var(--r-round);
@@ -1494,7 +1494,7 @@ h3 {
     animation: none;
   }
 
-  .bar-stack .plate {
+  .js .bar-stack .plate {
     clip-path: none;
     opacity: 1;
   }

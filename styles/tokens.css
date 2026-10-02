@@ -152,3 +152,53 @@
   --plate-shade: rgba(0, 0, 0, 0.18);
   --tabbar-shadow: rgba(20, 20, 30, 0.14);
 }
+
+/* Ohne JavaScript folgt die Palette der Systemeinstellung. Mit JavaScript
+   setzt das Inline-Skript data-theme, dann greift der Block oben. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+
+    --bg: #f2f2f6;
+    --surface: #fcfcfe;
+    --raised: #ffffff;
+    --line: #dedee5;
+    --line-soft: #e9e9ef;
+    --text: #1a1a20;
+    --mut: #63636e;
+    --faint: #6e6e7a;
+    --text-dim: #45454e;
+    --text-dim-soft: #55555f;
+    --plate-5: #b8b8b0;
+    --plate-neutral: #8a8a96;
+    --tint-action: #c0332a;
+    --tint-info: #2b57af;
+    --tint-effort: #85610a;
+    --tint-success: #25784a;
+    --tint-bg-action: rgba(214, 59, 52, 0.1);
+    --tint-bg-info: rgba(53, 103, 206, 0.1);
+    --tint-bg-effort: rgba(220, 169, 46, 0.16);
+    --tint-bg-success: rgba(55, 154, 91, 0.12);
+    --border-active: #b9b9c6;
+    --border-fail: rgba(214, 59, 52, 0.5);
+    --success-wash: rgba(55, 154, 91, 0.1);
+    --effort-wash: rgba(220, 169, 46, 0.08);
+    --effort-edge: rgba(220, 169, 46, 0.45);
+    --effort-glow: rgba(220, 169, 46, 0.18);
+    --code-bg: #f1f1f5;
+    --code-ink: #3a3a44;
+    --bar-fill: #c9c9d4;
+    --sleeve-top: #dcdce2;
+    --sleeve-bottom: #c9c9d3;
+    --collar: #c2c2cc;
+    --cover-base: #e7e7ed;
+    --cover-ink: #33333d;
+    --thumb-base: #eeeef3;
+    --on-plate-5: #1a1a20;
+    --shadow-soft: rgba(20, 20, 30, 0.18);
+    --scrim: rgba(15, 15, 20, 0.42);
+    --scrim-soft: rgba(15, 15, 20, 0.24);
+    --plate-shade: rgba(0, 0, 0, 0.18);
+    --tabbar-shadow: rgba(20, 20, 30, 0.14);
+  }
+}

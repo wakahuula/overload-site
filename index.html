@@ -56,6 +56,9 @@
           stored = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         }
         root.dataset.theme = stored;
+        window.setTimeout(function () {
+          if (window.__overloadBooted !== true) root.classList.remove('js');
+        }, 2500);
       })();
     </script>
 
@@ -344,9 +347,15 @@
                     <div class="bar" aria-hidden="true">
                       <span class="bar-sleeve"></span>
                       <span class="bar-collar"></span>
-                      <span class="bar-stack left" data-demo-stack="left"></span>
+                      <span class="bar-stack left" data-demo-stack="left">
+                        <i class="plate is-on" style="background: var(--plate-25); width: 19px; height: 71px"></i>
+                        <i class="plate is-on" style="background: var(--plate-15); width: 13px; height: 49px"></i>
+                      </span>
                       <span class="bar-shaft"></span>
-                      <span class="bar-stack right" data-demo-stack="right"></span>
+                      <span class="bar-stack right" data-demo-stack="right">
+                        <i class="plate is-on" style="background: var(--plate-25); width: 19px; height: 71px"></i>
+                        <i class="plate is-on" style="background: var(--plate-15); width: 13px; height: 49px"></i>
+                      </span>
                       <span class="bar-collar"></span>
                       <span class="bar-sleeve"></span>
                     </div>
