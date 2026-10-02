@@ -142,6 +142,17 @@ export const content = {
     'plates.p2': '2,5 kg',
     'plates.p2sub': '5 lb · Schwarz',
 
+    'analysis.label': 'Analyse',
+    'analysis.title': 'Volumen, Balance und Verlauf.',
+    'analysis.lead':
+      'Overload zählt nach jeder Session Abschluss-Punkte pro Muskel, vergleicht Drücken und Ziehen und führt den Trend über Wochen. Der Wochenreport schreibt seinen Vorschlag direkt in den Plan.',
+    'analysis.point1': 'Volumen pro Muskel, aus deinen Logs.',
+    'analysis.point2': 'Drücken:Ziehen-Balance jede Woche.',
+    'analysis.point3': 'Balance-Trend über mehrere Wochen.',
+    'analysis.point4': 'Wochenreport mit übernehmbarem Vorschlag.',
+    'analysis.reportLabel': 'Wochenreport',
+    'analysis.reportNote': 'Beispiel: Overload zählt die Sätze der Woche und schlägt die nächste Steigerung vor.',
+
     'privacy.label': 'Warum offline-first',
     'privacy.title': 'Dein Studio hat kein WLAN. Egal.',
     'privacy.lead':
@@ -160,6 +171,15 @@ export const content = {
     'balance.note':
       'Overload rechnet die Balance aus deinen Logs und zeigt den Verlauf über Wochen. Hier mit Beispieldaten.',
     'balance.example': 'Beispieldaten',
+
+    'nogo.label': 'Was Overload bewusst nicht tut',
+    'nogo.title': 'Kein Konto. Kein Abo für die Basics.',
+    'nogo.lead':
+      'Andere Tracker sperren den Kern hinter einem Abo. Overload hält Logging, Programme und Datenexport offen.',
+    'nogo.item1': 'Kein Konto, kein Onboarding-Zwang.',
+    'nogo.item2': 'Kein Abo für Logging, Programme und Export.',
+    'nogo.item3': 'Kein Tracking, keine Werbe-IDs, keine Analytics.',
+    'nogo.item4': 'Keine Cloud-Pflicht, kein Sync-Zwang.',
 
     'faq.label': 'Fragen',
     'faq.title': 'Kurz beantwortet.',
@@ -330,6 +350,17 @@ export const content = {
     'plates.p2': '2.5 kg',
     'plates.p2sub': '5 lb · Black',
 
+    'analysis.label': 'Analysis',
+    'analysis.title': 'Volume, balance and trend.',
+    'analysis.lead':
+      'After every session Overload counts completion points per muscle, compares push and pull and follows the trend across weeks. The weekly report writes its suggestion straight into your plan.',
+    'analysis.point1': 'Volume per muscle, from your logs.',
+    'analysis.point2': 'Push:pull balance every week.',
+    'analysis.point3': 'Balance trend across several weeks.',
+    'analysis.point4': 'Weekly report with a suggestion you can apply.',
+    'analysis.reportLabel': 'Weekly report',
+    'analysis.reportNote': 'Example: Overload counts the week’s sets and suggests the next increase.',
+
     'privacy.label': 'Why offline-first',
     'privacy.title': 'Your gym has no signal. Fine.',
     'privacy.lead':
@@ -348,6 +379,15 @@ export const content = {
     'balance.note':
       'Overload derives the balance from your logs and shows the trend over weeks. Shown here with sample data.',
     'balance.example': 'Sample data',
+
+    'nogo.label': 'What Overload deliberately does not do',
+    'nogo.title': 'No account. No paywall on the basics.',
+    'nogo.lead':
+      'Other trackers lock the core behind a subscription. Overload keeps logging, programs and export open.',
+    'nogo.item1': 'No account, no forced onboarding.',
+    'nogo.item2': 'No subscription for logging, programs and export.',
+    'nogo.item3': 'No tracking, no ad IDs, no analytics.',
+    'nogo.item4': 'No cloud requirement, no forced sync.',
 
     'faq.label': 'Questions',
     'faq.title': 'Short answers.',
