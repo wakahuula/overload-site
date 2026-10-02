@@ -22,7 +22,6 @@ export const content = {
     'nav.themeLabel': 'Erscheinungsbild wechseln',
     'nav.langLabel': 'Sprache wechseln',
 
-    'hero.kicker': 'Offline-first · Kein Konto',
     'hero.title1': 'Mehr Gewicht.',
     'hero.title2': 'Jede Woche.',
     'hero.lead':
@@ -40,7 +39,6 @@ export const content = {
     'marquee.5': 'Kein Ballast',
     'marquee.6': 'Deine Daten',
 
-    'principle.label': 'Das Prinzip',
     'principle.title': 'Scrollen lädt die Stange.',
     'principle.lead':
       'Progressive Overload heißt: ein bisschen mehr als letzte Woche. Overload macht daraus eine Regel statt eines Gefühls und rechnet das Arbeitsgewicht für jede Einheit aus.',
@@ -54,7 +52,6 @@ export const content = {
     'principle.msg5': 'Zwei 10er drauf',
     'principle.msg6': 'Vollbeladen · neue Bestleistung',
 
-    'demo.label': 'Live-Demo',
     'demo.title': 'Rechne deine Stange aus.',
     'demo.lead':
       'Stell das Gewicht ein, Overload verteilt es auf die Scheiben. Die Demo nutzt denselben Farbcode wie die App und rechnet in Kilogramm oder Pfund.',
@@ -70,7 +67,6 @@ export const content = {
     'demo.noteRest': 'Nicht ladbar: {rest} pro Seite',
     'demo.caption': 'Scheibenrechner mit dem IPF-Farbcode der App.',
 
-    'prog.label': 'Progressions-Engine',
     'prog.title': 'Was nächste Woche passiert.',
     'prog.lead':
       'Ein erfülltes Soll hebt den Training Max. Ein Fehlschlag steigt die Schema-Leiter hinauf, und wer auch die letzte Stufe verfehlt, setzt den Training Max zurück. Klick es durch.',
@@ -87,7 +83,6 @@ export const content = {
     'prog.eventStart': 'Start bei Training Max {tm}.',
     'prog.caption': 'Vereinfachte GZCL-Progression, dieselbe Logik wie in der App.',
 
-    'features.label': 'Funktionen',
     'features.title': 'Kein Ballast. Nur Training.',
     'features.lead':
       'Overload verzichtet auf alles, was dich vom Satz unter der Stange abhält. Was bleibt, funktioniert auch ohne Empfang.',
@@ -125,7 +120,6 @@ export const content = {
     'feat.adapt.text':
       'Kilogramm oder Pfund, Meter oder Fuß: alles ist eine Anzeige-Einstellung. Hell oder dunkel, Deutsch oder Englisch, und die Schriftgröße stellst du selbst ein.',
 
-    'plates.label': 'Das Scheibensystem',
     'plates.title': 'Farbcode wie auf der Plattform.',
     'plates.lead':
       'Jedes Gewicht hat seine Farbe, von der 25er bis zur kleinen 2,5er. In der App markiert der Code Buttons, Balken und Bestleistungen.',
@@ -142,7 +136,6 @@ export const content = {
     'plates.p2': '2,5 kg',
     'plates.p2sub': '5 lb · Schwarz',
 
-    'analysis.label': 'Analyse',
     'analysis.title': 'Volumen, Balance und Verlauf.',
     'analysis.lead':
       'Overload zählt nach jeder Session Abschluss-Punkte pro Muskel, vergleicht Drücken und Ziehen und führt den Trend über Wochen. Der Wochenreport schreibt seinen Vorschlag direkt in den Plan.',
@@ -153,7 +146,6 @@ export const content = {
     'analysis.reportLabel': 'Wochenreport',
     'analysis.reportNote': 'Beispiel: Overload zählt die Sätze der Woche und schlägt die nächste Steigerung vor.',
 
-    'privacy.label': 'Warum offline-first',
     'privacy.title': 'Dein Studio hat kein WLAN. Egal.',
     'privacy.lead':
       'Overload läuft vollständig auf dem Gerät. Keine Anmeldung, keine Sync-Warteschleife, kein Server, der mitliest. Auch im Keller ohne Empfang.',
@@ -172,7 +164,6 @@ export const content = {
       'Overload rechnet die Balance aus deinen Logs und zeigt den Verlauf über Wochen. Hier mit Beispieldaten.',
     'balance.example': 'Beispieldaten',
 
-    'nogo.label': 'Was Overload bewusst nicht tut',
     'nogo.title': 'Kein Konto. Kein Abo für die Basics.',
     'nogo.lead':
       'Andere Tracker sperren den Kern hinter einem Abo. Overload hält Logging, Programme und Datenexport offen.',
@@ -181,7 +172,6 @@ export const content = {
     'nogo.item3': 'Kein Tracking, keine Werbe-IDs, keine Analytics.',
     'nogo.item4': 'Keine Cloud-Pflicht, kein Sync-Zwang.',
 
-    'faq.label': 'Fragen',
     'faq.title': 'Kurz beantwortet.',
     'faq.q1': 'Ist Overload kostenlos?',
     'faq.a1':
@@ -230,7 +220,6 @@ export const content = {
     'nav.themeLabel': 'Toggle appearance',
     'nav.langLabel': 'Switch language',
 
-    'hero.kicker': 'Offline-first · No account',
     'hero.title1': 'More weight.',
     'hero.title2': 'Every week.',
     'hero.lead':
@@ -248,7 +237,6 @@ export const content = {
     'marquee.5': 'No bloat',
     'marquee.6': 'Your data',
 
-    'principle.label': 'The principle',
     'principle.title': 'Scrolling loads the bar.',
     'principle.lead':
       'Progressive overload means a little more than last week. Overload turns that into a rule instead of a feeling and works out the load for every session.',
@@ -262,7 +250,6 @@ export const content = {
     'principle.msg5': 'Two 10s go on',
     'principle.msg6': 'Fully loaded · new best',
 
-    'demo.label': 'Live demo',
     'demo.title': 'Work out your bar.',
     'demo.lead':
       'Set the weight and Overload spreads it across the plates. The demo uses the same colour code as the app and works in kilograms or pounds.',
@@ -278,7 +265,6 @@ export const content = {
     'demo.noteRest': 'Not loadable: {rest} per side',
     'demo.caption': 'Plate calculator with the app IPF colour code.',
 
-    'prog.label': 'Progression engine',
     'prog.title': 'What happens next week.',
     'prog.lead':
       'A met target raises the training max. A miss climbs the scheme ladder, and miss the last scheme and the training max resets. Click through it.',
@@ -295,7 +281,6 @@ export const content = {
     'prog.eventStart': 'Starting at a training max of {tm}.',
     'prog.caption': 'Simplified GZCL progression, the same logic the app uses.',
 
-    'features.label': 'Features',
     'features.title': 'No bloat. Just training.',
     'features.lead':
       'Overload drops everything that stands between you and the set under the bar. What stays works without a signal.',
@@ -333,7 +318,6 @@ export const content = {
     'feat.adapt.text':
       'Kilograms or pounds, metres or feet: all just display settings. Light or dark, German or English, and you set the text size yourself.',
 
-    'plates.label': 'The plate system',
     'plates.title': 'Colour code like on the platform.',
     'plates.lead':
       'Every weight has its colour, from the 25 down to the small 2.5. In the app the code marks buttons, bars and best lifts.',
@@ -350,7 +334,6 @@ export const content = {
     'plates.p2': '2.5 kg',
     'plates.p2sub': '5 lb · Black',
 
-    'analysis.label': 'Analysis',
     'analysis.title': 'Volume, balance and trend.',
     'analysis.lead':
       'After every session Overload counts completion points per muscle, compares push and pull and follows the trend across weeks. The weekly report writes its suggestion straight into your plan.',
@@ -361,7 +344,6 @@ export const content = {
     'analysis.reportLabel': 'Weekly report',
     'analysis.reportNote': 'Example: Overload counts the week’s sets and suggests the next increase.',
 
-    'privacy.label': 'Why offline-first',
     'privacy.title': 'Your gym has no signal. Fine.',
     'privacy.lead':
       'Overload runs entirely on the device. No sign-in, no sync queue, no server reading along. Even in a basement with no signal.',
@@ -380,7 +362,6 @@ export const content = {
       'Overload derives the balance from your logs and shows the trend over weeks. Shown here with sample data.',
     'balance.example': 'Sample data',
 
-    'nogo.label': 'What Overload deliberately does not do',
     'nogo.title': 'No account. No paywall on the basics.',
     'nogo.lead':
       'Other trackers lock the core behind a subscription. Overload keeps logging, programs and export open.',
@@ -389,7 +370,6 @@ export const content = {
     'nogo.item3': 'No tracking, no ad IDs, no analytics.',
     'nogo.item4': 'No cloud requirement, no forced sync.',
 
-    'faq.label': 'Questions',
     'faq.title': 'Short answers.',
     'faq.q1': 'Is Overload free?',
     'faq.a1':

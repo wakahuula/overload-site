@@ -80,14 +80,6 @@ h3 {
   letter-spacing: 0.02em;
 }
 
-.section-label {
-  display: block;
-  font: 500 11px/1.4 var(--font-mono);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--mut);
-}
-
 .section-title {
   font-size: clamp(32px, 5.4vw, 60px);
   font-weight: 700;
@@ -141,7 +133,6 @@ h3 {
 .btn-primary {
   background: var(--action);
   color: var(--on-action);
-  box-shadow: 0 12px 36px -12px rgba(214, 59, 52, 0.6);
 }
 
 .btn-primary:hover {
@@ -335,24 +326,6 @@ h3 {
   overflow: hidden;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% -12%, rgba(214, 59, 52, 0.16), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 104px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 104px);
-}
-
-:root[data-theme='light'] .hero::before {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% -12%, rgba(214, 59, 52, 0.1), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(20, 20, 30, 0.03) 0 1px, transparent 1px 104px),
-    repeating-linear-gradient(0deg, rgba(20, 20, 30, 0.03) 0 1px, transparent 1px 104px);
-}
-
 .hero-grid {
   position: relative;
   display: grid;
@@ -365,34 +338,6 @@ h3 {
 .hero-copy {
   position: relative;
   z-index: 1;
-}
-
-.kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 26px;
-  padding: 6px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-round);
-  font: 500 11px var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--mut);
-}
-
-.kicker::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--success);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
 }
 
 .hero-title {
@@ -466,30 +411,12 @@ h3 {
   color: var(--mut);
 }
 
-.trust li::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--tint-success);
-}
-
 .hero-stage {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 320px;
-}
-
-.hero-stage::before {
-  content: '';
-  position: absolute;
-  width: min(460px, 90%);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--effort-glow), transparent 68%);
-  pointer-events: none;
 }
 
 /* ------------------------------------------------------------ Barbell */
@@ -603,11 +530,6 @@ h3 {
   text-transform: uppercase;
 }
 
-.marquee span {
-  font: 500 24px/1 var(--font-mono);
-  color: var(--faint);
-}
-
 .mq-red { color: var(--plate-25); }
 .mq-blue { color: var(--tint-info); }
 .mq-yellow { color: var(--tint-effort); }
@@ -683,7 +605,7 @@ h3 {
   pointer-events: none;
   opacity: 0;
   transition: opacity 600ms var(--ease-out);
-  background: radial-gradient(ellipse 70% 50% at 50% 55%, var(--effort-glow), transparent 70%);
+  background: var(--effort-wash);
 }
 
 .principle.is-maxed .pr-flash {
@@ -883,6 +805,21 @@ h3 {
   overflow: hidden;
 }
 
+.demo-title {
+  font: 600 14px/1.4 var(--font-body);
+  color: var(--text);
+}
+
+.chart-title {
+  font: 600 14px/1.4 var(--font-body);
+  color: var(--text);
+}
+
+.chart-note {
+  font: 400 11px var(--font-mono);
+  color: var(--faint);
+}
+
 .side-note {
   margin-top: 10px;
   text-align: center;
@@ -1012,7 +949,7 @@ h3 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
   margin-top: 46px;
 }
@@ -1029,17 +966,6 @@ h3 {
 
 .card:hover {
   border-color: var(--line);
-  transform: translateY(-4px);
-}
-
-.card .tag {
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 4px 8px;
-  border-radius: var(--r-badge);
-  font: 500 10px var(--font-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .card h3 {
@@ -1055,11 +981,6 @@ h3 {
   line-height: 1.55;
   text-wrap: pretty;
 }
-
-.c-red .tag { color: var(--tint-action); background: var(--tint-bg-action); }
-.c-blue .tag { color: var(--tint-info); background: var(--tint-bg-info); }
-.c-yellow .tag { color: var(--tint-effort); background: var(--tint-bg-effort); }
-.c-green .tag { color: var(--tint-success); background: var(--tint-bg-success); }
 
 /* ------------------------------------------------------ Scheiben-Chips */
 
@@ -1082,7 +1003,6 @@ h3 {
 }
 
 .chip:hover {
-  transform: translateY(-3px);
   border-color: var(--line);
 }
 
@@ -1128,16 +1048,6 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-}
-
-.balance-example {
-  font: 500 10px var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--tint-effort);
-  background: var(--tint-bg-effort);
-  padding: 4px 8px;
-  border-radius: var(--r-badge);
 }
 
 .balance-row {
@@ -1353,9 +1263,7 @@ h3 {
   border: 1px solid var(--line-soft);
   border-radius: var(--r-sheet);
   text-align: center;
-  background:
-    radial-gradient(ellipse 80% 90% at 50% 118%, rgba(214, 59, 52, 0.16), transparent 62%),
-    var(--surface);
+  background: var(--surface);
 }
 
 .cta-logo {
