@@ -75,15 +75,14 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.015em;
 }
 
 .section-title {
   font-size: clamp(32px, 5.4vw, 60px);
-  font-weight: 700;
-  line-height: 0.94;
-  letter-spacing: 0.012em;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
   margin: 12px 0 18px;
   text-wrap: balance;
 }
@@ -111,7 +110,7 @@ h3 {
   border: 1px solid transparent;
   border-radius: var(--r-cta);
   font: 600 16px var(--font-body);
-  letter-spacing: 0.02em;
+  letter-spacing: -0.015em;
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -214,9 +213,8 @@ h3 {
 
 .logo-word {
   display: block;
-  font: 700 15px/0.92 var(--font-display);
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
+  font: 800 16px/0.95 var(--font-display);
+  letter-spacing: -0.02em;
   color: var(--text);
 }
 
@@ -229,7 +227,7 @@ h3 {
 .logo-bars i {
   flex: 1;
   height: 3px;
-  border-radius: 1px;
+  border-radius: var(--r-round);
 }
 
 .logo-bars i:nth-child(1) { background: var(--plate-25); }
@@ -246,8 +244,8 @@ h3 {
 
 .nav-links a {
   font: 500 12px var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
   text-decoration: none;
   transition: color var(--dur-fast);
@@ -275,7 +273,8 @@ h3 {
   background: transparent;
   color: var(--mut);
   font: 500 12px var(--font-mono);
-  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   padding: 8px 10px;
   cursor: pointer;
   transition: background-color var(--dur-fast), color var(--dur-fast);
@@ -343,7 +342,7 @@ h3 {
   font-size: clamp(50px, 9vw, 128px);
   font-weight: 700;
   line-height: 0.88;
-  letter-spacing: 0.004em;
+  letter-spacing: -0.015em;
 }
 
 .hero-title em {
@@ -404,9 +403,9 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 500 11px var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
 }
 
@@ -525,8 +524,7 @@ h3 {
 
 .marquee b {
   font: 700 24px/1 var(--font-display);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .mq-red { color: var(--plate-25); }
@@ -586,15 +584,15 @@ h3 {
 .load-weight small {
   font-size: 0.3em;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   color: var(--faint);
 }
 
 .load-caption {
   margin-top: 2vh;
   font: 500 12px var(--font-mono);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
 }
 
@@ -663,6 +661,7 @@ h3 {
   align-items: center;
   padding: 6px 24px 0;
   font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
   color: var(--text-dim);
 }
 
@@ -678,9 +677,9 @@ h3 {
 }
 
 .demo-offline {
-  font: 500 11px var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--tint-success);
 }
 
@@ -702,7 +701,7 @@ h3 {
 .wnum small {
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   color: var(--faint);
 }
 
@@ -766,7 +765,8 @@ h3 {
 .range-scale {
   display: flex;
   justify-content: space-between;
-  font: 400 10px var(--font-mono);
+  font: 400 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
   color: var(--faint);
 }
 
@@ -782,9 +782,9 @@ h3 {
   border: 0;
   background: transparent;
   color: var(--mut);
-  font: 500 11px var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   padding: 8px 14px;
   cursor: pointer;
   transition: background-color var(--dur-fast), color var(--dur-fast);
@@ -815,16 +815,17 @@ h3 {
 }
 
 .chart-note {
-  font: 400 11px var(--font-mono);
+  font: 400 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
   color: var(--faint);
 }
 
 .side-note {
   margin-top: 10px;
   text-align: center;
-  font: 500 10px var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
 }
 
@@ -859,9 +860,9 @@ h3 {
 .prog-stat span {
   display: block;
   margin-top: 8px;
-  font: 500 10px var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
 }
 
@@ -877,8 +878,9 @@ h3 {
   border: 1px solid var(--line-soft);
   border-radius: var(--r-row);
   text-align: center;
-  font: 500 11px var(--font-mono);
-  letter-spacing: 0.08em;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
   transition: border-color var(--dur-base), color var(--dur-base), background-color var(--dur-base);
 }
@@ -896,7 +898,7 @@ h3 {
   border: 1px solid var(--line-soft);
   border-radius: var(--r-row);
   background: var(--code-bg);
-  font: 400 13px/1.5 var(--font-mono);
+  font: 400 13px/1.5 var(--font-code);
   color: var(--code-ink);
 }
 
@@ -939,8 +941,9 @@ h3 {
 
 .caption {
   margin-top: 14px;
-  font: 400 11px var(--font-mono);
-  letter-spacing: 0.04em;
+  font: 400 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--faint);
 }
 
@@ -970,8 +973,7 @@ h3 {
 .card h3 {
   margin-bottom: 10px;
   font: 600 21px/1.15 var(--font-display);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  letter-spacing: -0.015em;
 }
 
 .card p {
@@ -1020,7 +1022,8 @@ h3 {
 
 .chip .lb {
   margin-top: 4px;
-  font: 400 11px var(--font-mono);
+  font: 400 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
   color: var(--faint);
 }
 
@@ -1054,9 +1057,9 @@ h3 {
   grid-template-columns: 76px 1fr auto;
   align-items: center;
   gap: 12px;
-  font: 500 11px var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
 }
 
@@ -1158,9 +1161,9 @@ h3 {
 .stat span {
   display: block;
   margin-top: 10px;
-  font: 500 10px var(--font-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 500 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--mut);
 }
 
@@ -1175,8 +1178,7 @@ h3 {
 
 .nogo h3 {
   font: 700 clamp(24px, 3.6vw, 34px)/1 var(--font-display);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  letter-spacing: -0.015em;
 }
 
 .nogo-list {
@@ -1300,8 +1302,9 @@ h3 {
 
 .cta-note {
   margin-top: 18px;
-  font: 400 11px var(--font-mono);
-  letter-spacing: 0.06em;
+  font: 400 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   color: var(--faint);
 }
 
@@ -1324,6 +1327,7 @@ h3 {
 .footer a {
   margin: 0;
   font: 400 12px/1.8 var(--font-mono);
+  font-variant-numeric: tabular-nums;
   color: var(--faint);
 }
 

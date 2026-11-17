@@ -1,3 +1,34 @@
+@font-face {
+  font-family: 'Allo Text';
+  src: url('../fonts/AlloText-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Allo Text';
+  src: url('../fonts/AlloText-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Allo Text';
+  src: url('../fonts/AlloText-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Allo Display';
+  src: url('../fonts/AlloDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Allo Display';
+  src: url('../fonts/AlloDisplay-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+
 /**
  * Design-Tokens der Website. Quelle ist 1:1
  * Powerful/src/shared/theme.ts (Overload Design System v1.0).
@@ -70,9 +101,13 @@
   --plate-shade: rgba(0, 0, 0, 0.35);
   --tabbar-shadow: rgba(0, 0, 0, 0.4);
 
-  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --font-body: 'Barlow', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Allo (SIL OFL, fonts/OFL.txt), feste runde Instanzen wie in der App.
+     --font-mono ist der historische Name der Begleitrolle: jetzt Allo mit
+     Tabellenziffern. Echte Festbreite nur noch für Code (--font-code). */
+  --font-display: 'Allo Display', system-ui, sans-serif;
+  --font-body: 'Allo Text', system-ui, sans-serif;
+  --font-mono: 'Allo Text', system-ui, sans-serif;
+  --font-code: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --r-chip: 6px;
   --r-badge: 4px;
