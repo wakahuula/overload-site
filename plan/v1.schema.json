@@ -1,0 +1,450 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://wakahuula.github.io/overload-site/plan/v1.schema.json",
+  "$comment": "Master copy: Overload app repo, src/shared/plan/v1.schema.json, checked against the app's own validation by src/shared/plan/__tests__/schema.test.ts. overload-site serves an identical copy.",
+  "title": "overload-plan v1",
+  "description": "A training plan for the Overload app. Overload checks the same rules itself; it also rejects unknown fields, unknown workout keys in weeks, unused workouts, plans without a single training day, \"percentTM\" or rule \"percentage\" on exercises without \"reps\", and more than 52 weeks in total (weeks × repeat). Files and pasted text may be at most 2 MB.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "version", "name", "workouts", "weeks"],
+  "properties": {
+    "format": {
+      "const": "overload-plan"
+    },
+    "version": {
+      "const": 1
+    },
+    "name": {
+      "$ref": "#/$defs/text80"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "author": {
+      "$ref": "#/$defs/text80"
+    },
+    "style": {
+      "enum": [
+        "bodybuilding",
+        "powerbuilding",
+        "powerlifting",
+        "strongman",
+        "crossfit",
+        "calisthenics",
+        "general_fitness"
+      ]
+    },
+    "level": {
+      "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "unit": {
+      "description": "Unit for every weight in the plan. Default kg.",
+      "enum": ["kg", "lbs"],
+      "default": "kg"
+    },
+    "workouts": {
+      "description": "Each workout once, under a key. Weeks point to these keys.",
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 14,
+      "propertyNames": {
+        "pattern": "^[a-z0-9_-]{1,32}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/workout"
+      }
+    },
+    "weeks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 52,
+      "items": {
+        "$ref": "#/$defs/week"
+      }
+    },
+    "repeat": {
+      "description": "How often the list of weeks runs. Default 1.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12,
+      "default": 1
+    },
+    "origin": {
+      "description": "Only in plans shared from the app: lineage for update and duplicate detection.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/text80"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      }
+    },
+    "photo": {
+      "description": "Only in plans shared from the app. Anything else is dropped with a warning, not an error.",
+      "type": "string",
+      "maxLength": 1500000,
+      "pattern": "^data:image/(jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$"
+    },
+    "customExercises": {
+      "description": "Only in plans shared from the app: exercises without a catalog slug, keyed by the name used in \"exercise\".",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/customExercise"
+      }
+    }
+  },
+  "$defs": {
+    "text80": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "workout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "exercises"],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text80"
+        },
+        "exercises": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/exercise"
+          }
+        }
+      }
+    },
+    "exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exercise", "sets"],
+      "oneOf": [
+        {
+          "required": ["reps"]
+        },
+        {
+          "required": ["seconds"]
+        },
+        {
+          "required": ["meters"]
+        }
+      ],
+      "properties": {
+        "exercise": {
+          "description": "Catalog slug (e.g. \"bench-press\") or a name. Unknown names become custom exercises.",
+          "$ref": "#/$defs/text80"
+        },
+        "sets": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "reps": {
+          "description": "Repetitions: a whole number or [min, max], 1 to 100.",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "description": "[min, max], min not greater than max"
+            }
+          ]
+        },
+        "seconds": {
+          "description": "Duration for timed exercises: a whole number or [min, max], 1 to 3600.",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3600
+            },
+            {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3600
+                },
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3600
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "description": "[min, max], min not greater than max"
+            }
+          ]
+        },
+        "meters": {
+          "description": "Distance for carries and cardio: a whole number or [min, max], 1 to 10000.",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000
+            },
+            {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10000
+                },
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10000
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2,
+              "description": "[min, max], min not greater than max"
+            }
+          ]
+        },
+        "rest": {
+          "description": "Rest in seconds. Default 120.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 900,
+          "default": 120
+        },
+        "load": {
+          "$ref": "#/$defs/load"
+        },
+        "progression": {
+          "$ref": "#/$defs/progression"
+        },
+        "amrapLast": {
+          "description": "Last set as many reps as possible.",
+          "type": "boolean"
+        },
+        "superset": {
+          "description": "Same label = same superset.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "load": {
+      "description": "Exactly one of weight, percentTM, rpe.",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "maxProperties": 1,
+      "properties": {
+        "weight": {
+          "description": "Weight in the plan's unit.",
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 1000
+        },
+        "percentTM": {
+          "description": "Percent of the training max. Only with \"reps\".",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "rpe": {
+          "description": "Target RPE, 5 to 10 in half steps.",
+          "type": "number",
+          "minimum": 5,
+          "maximum": 10,
+          "multipleOf": 0.5
+        }
+      }
+    },
+    "progression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule"],
+      "properties": {
+        "rule": {
+          "enum": [
+            "linear",
+            "double",
+            "amrap",
+            "rpe",
+            "rir",
+            "cycle",
+            "percentage",
+            "time",
+            "distance",
+            "none"
+          ]
+        },
+        "step": {
+          "description": "Weight step in the plan's unit (linear, double, amrap).",
+          "$ref": "#/$defs/param"
+        },
+        "upperReps": {
+          "description": "Reps at which double progression adds weight.",
+          "$ref": "#/$defs/param"
+        },
+        "targetRpe": {
+          "$ref": "#/$defs/param"
+        },
+        "targetRir": {
+          "$ref": "#/$defs/param"
+        },
+        "tolerance": {
+          "description": "Band around the target: RIR in reps, RPE in half steps.",
+          "$ref": "#/$defs/param"
+        },
+        "stepSeconds": {
+          "$ref": "#/$defs/param"
+        },
+        "maxSeconds": {
+          "$ref": "#/$defs/param"
+        },
+        "stepDistance": {
+          "$ref": "#/$defs/param"
+        },
+        "maxDistance": {
+          "$ref": "#/$defs/param"
+        },
+        "stepPercent": {
+          "description": "Percent per success (percentage), e.g. 2 = +2 %.",
+          "$ref": "#/$defs/param"
+        },
+        "percentBase": {
+          "enum": ["tm", "weight"],
+          "default": "tm"
+        },
+        "cycleSteps": {
+          "description": "Weight step per cycle week (cycle).",
+          "$ref": "#/$defs/cycleList"
+        },
+        "cycleReps": {
+          "description": "Reps per cycle week (cycle).",
+          "$ref": "#/$defs/cycleList"
+        }
+      }
+    },
+    "param": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "cycleList": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 52,
+      "items": {
+        "type": "number",
+        "minimum": -1000,
+        "maximum": 1000
+      }
+    },
+    "week": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["days"],
+      "properties": {
+        "deload": {
+          "type": "boolean"
+        },
+        "days": {
+          "description": "One entry per day: a workout key or null for a rest day.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 7,
+          "items": {
+            "type": ["string", "null"],
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "customExercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "primaryMuscles"],
+      "properties": {
+        "type": {
+          "enum": [
+            "barbell",
+            "dumbbell",
+            "machine",
+            "cable",
+            "bodyweight",
+            "kettlebell",
+            "cardio",
+            "strongman"
+          ]
+        },
+        "primaryMuscles": {
+          "$ref": "#/$defs/muscles",
+          "type": "array",
+          "minItems": 1
+        },
+        "secondaryMuscles": {
+          "$ref": "#/$defs/muscles"
+        },
+        "logBy": {
+          "enum": ["reps", "time", "distance"]
+        }
+      }
+    },
+    "muscles": {
+      "type": "array",
+      "maxItems": 14,
+      "items": {
+        "enum": [
+          "chest",
+          "back",
+          "shoulders",
+          "biceps",
+          "triceps",
+          "forearms",
+          "abs",
+          "quads",
+          "hamstrings",
+          "glutes",
+          "calves",
+          "traps",
+          "lats",
+          "full_body"
+        ]
+      }
+    }
+  }
+}
