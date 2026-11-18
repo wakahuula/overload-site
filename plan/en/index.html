@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plan format overload-plan v1 · Overload</title>
+    <meta name="description" content="How Overload reads training plans as JSON: structure, fields, limits, example and JSON Schema." />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="canonical" href="https://wakahuula.github.io/overload-site/plan/en/" />
+    <link rel="alternate" hreflang="de" href="https://wakahuula.github.io/overload-site/plan/" />
+    <link rel="alternate" hreflang="en" href="https://wakahuula.github.io/overload-site/plan/en/" />
+    <link rel="alternate" type="application/schema+json" href="https://wakahuula.github.io/overload-site/plan/v1.schema.json" />
+    <link rel="icon" type="image/png" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/doc.css" />
+  </head>
+  <body>
+    <main class="doc">
+      <nav class="doc-top">
+        <a href="../../">Back to the home page</a>
+        <a href="../" hreflang="de" lang="de">Deutsch</a>
+      </nav>
+<h1>Plan format overload-plan v1</h1>
+<p>Overload reads training plans as JSON. A plan gets into the app as a file someone shared from Overload (<code>Name.overload.json</code>) or as pasted text, such as an AI's answer. Overload contains no AI and sends nothing anywhere.</p>
+<p>In the app, <strong>Plans › Import › Plan with AI</strong> writes instructions for your own AI. Its answer comes back via <strong>Paste plan</strong>. Overload checks every field and shows what arrives before saving.</p>
+<p>Machine-readable: <a href="../v1.schema.json">JSON Schema (draft 2020-12)</a>.</p>
+
+<h2>Structure</h2>
+<p>Each workout is written once, under a key in <code>workouts</code>. The weeks in <code>weeks</code> are lists of days pointing to those keys. <code>null</code> is a rest day. If the sequence of weeks repeats, write it once and set <code>repeat</code> to how often it runs. A twelve-week plan stays short, and weeks can still differ.</p>
+
+<h2>Top level</h2>
+<div class="table-scroll"><table>
+<tr><th>Field</th><th>Rule</th></tr>
+<tr><td><code>format</code></td><td>required, exactly <code>"overload-plan"</code></td></tr>
+<tr><td><code>version</code></td><td>required, exactly <code>1</code>. The app rejects a higher version and asks for an update.</td></tr>
+<tr><td><code>name</code></td><td>required, 1 to 80 characters</td></tr>
+<tr><td><code>description</code></td><td>optional, up to 500 characters</td></tr>
+<tr><td><code>author</code></td><td>optional, up to 80 characters</td></tr>
+<tr><td><code>style</code></td><td>optional: <code>bodybuilding</code>, <code>powerbuilding</code>, <code>powerlifting</code>, <code>strongman</code>, <code>crossfit</code>, <code>calisthenics</code>, <code>general_fitness</code></td></tr>
+<tr><td><code>level</code></td><td>optional: <code>beginner</code>, <code>intermediate</code>, <code>advanced</code></td></tr>
+<tr><td><code>unit</code></td><td>optional, <code>kg</code> or <code>lbs</code>, default <code>kg</code>. Applies to every weight in the plan.</td></tr>
+<tr><td><code>workouts</code></td><td>required, 1 to 14 workouts. Keys of 1 to 32 characters from <code>a-z</code>, <code>0-9</code>, <code>_</code> and <code>-</code>. Each workout has <code>name</code> and <code>exercises</code> (1 to 20 exercises).</td></tr>
+<tr><td><code>weeks</code></td><td>required, 1 to 52 weeks</td></tr>
+<tr><td><code>repeat</code></td><td>optional, 1 to 12, default 1. Total weeks (<code>weeks</code> times <code>repeat</code>) at most 52.</td></tr>
+</table></div>
+<p>Only in plans Overload shares itself: <code>origin</code> (lineage for update and duplicate detection), <code>photo</code> (data URI, JPEG, PNG or WebP) and <code>customExercises</code> (custom exercises without a catalog slug).</p>
+
+<h2>Exercise</h2>
+<div class="table-scroll"><table>
+<tr><th>Field</th><th>Rule</th></tr>
+<tr><td><code>exercise</code></td><td>required. A slug from the app's catalog, such as <code>bench-press</code>, or a name. Overload creates unknown names as custom exercises and marks them in the preview.</td></tr>
+<tr><td><code>sets</code></td><td>required, whole number 1 to 20</td></tr>
+<tr><td><code>reps</code> / <code>seconds</code> / <code>meters</code></td><td>exactly one of them. Whole number or <code>[min, max]</code>. Reps 1 to 100, seconds 1 to 3600, meters 1 to 10000.</td></tr>
+<tr><td><code>rest</code></td><td>rest in seconds, 0 to 900, default 120</td></tr>
+<tr><td><code>load</code></td><td>optional, exactly one of: <code>weight</code> (in <code>unit</code>), <code>percentTM</code> (1 to 120, percent of training max, only with <code>reps</code>), <code>rpe</code> (5 to 10 in half steps)</td></tr>
+<tr><td><code>progression</code></td><td>optional, see below</td></tr>
+<tr><td><code>amrapLast</code></td><td>optional, <code>true</code>: last set as many reps as possible</td></tr>
+<tr><td><code>superset</code></td><td>optional, label up to 8 characters. Same label means superset.</td></tr>
+<tr><td><code>notes</code></td><td>optional, up to 500 characters</td></tr>
+</table></div>
+
+<h2>Progression</h2>
+<p><code>progression</code> has a <code>rule</code> and that rule's parameters. Weight steps are in the plan's unit.</p>
+<div class="table-scroll"><table>
+<tr><th>Rule</th><th>Parameters</th></tr>
+<tr><td><code>linear</code></td><td><code>step</code>: more weight after every completed session</td></tr>
+<tr><td><code>double</code></td><td><code>upperReps</code>, <code>step</code>: reps first up to <code>upperReps</code>, then more weight</td></tr>
+<tr><td><code>amrap</code></td><td><code>step</code>: increase based on the last set taken to as many reps as possible</td></tr>
+<tr><td><code>rpe</code></td><td><code>targetRpe</code>, <code>tolerance</code></td></tr>
+<tr><td><code>rir</code></td><td><code>targetRir</code>, <code>tolerance</code></td></tr>
+<tr><td><code>percentage</code></td><td><code>stepPercent</code>, <code>percentBase</code> (<code>tm</code> or <code>weight</code>), only with <code>reps</code></td></tr>
+<tr><td><code>cycle</code></td><td><code>cycleSteps</code>, <code>cycleReps</code>: one value per cycle week</td></tr>
+<tr><td><code>time</code></td><td><code>stepSeconds</code>, <code>maxSeconds</code></td></tr>
+<tr><td><code>distance</code></td><td><code>stepDistance</code>, <code>maxDistance</code></td></tr>
+<tr><td><code>none</code></td><td>no increase</td></tr>
+</table></div>
+
+<h2>Week</h2>
+<p>Each week has <code>days</code> with 1 to 7 entries: a workout key or <code>null</code> for a rest day. <code>"deload": true</code> marks a deload week.</p>
+
+<h2>How Overload checks</h2>
+<ul>
+<li>Text up to 2 MB. If there is text before or after the JSON, Overload takes the first code block, or everything from the first <code>{</code> to the last <code>}</code>.</li>
+<li>Unknown fields are errors, not silently dropped. Otherwise nobody would notice <code>"weight_kg"</code> written instead of <code>"load"</code>.</li>
+<li>Cross-checks: every key in <code>days</code> exists under <code>workouts</code>, every workout appears in at least one week, and the plan has at least one training day.</li>
+<li>Errors are collected with their path, for example <code>workouts.upper.exercises[2].sets: must be a whole number from 1 to 20 (found: "4-5")</code>. "Copy errors" hands them back to the AI with a short request.</li>
+</ul>
+
+<h2>Example</h2>
+<pre><code>{
+  &quot;format&quot;: &quot;overload-plan&quot;,
+  &quot;version&quot;: 1,
+  &quot;name&quot;: &quot;Full body A/B&quot;,
+  &quot;level&quot;: &quot;beginner&quot;,
+  &quot;unit&quot;: &quot;kg&quot;,
+  &quot;workouts&quot;: {
+    &quot;a&quot;: {
+      &quot;name&quot;: &quot;Full body A&quot;,
+      &quot;exercises&quot;: [
+        {
+          &quot;exercise&quot;: &quot;squat&quot;,
+          &quot;sets&quot;: 3,
+          &quot;reps&quot;: 5,
+          &quot;rest&quot;: 180,
+          &quot;load&quot;: {
+            &quot;weight&quot;: 60
+          },
+          &quot;progression&quot;: {
+            &quot;rule&quot;: &quot;linear&quot;,
+            &quot;step&quot;: 2.5
+          }
+        },
+        {
+          &quot;exercise&quot;: &quot;bench-press&quot;,
+          &quot;sets&quot;: 3,
+          &quot;reps&quot;: [
+            8,
+            10
+          ],
+          &quot;rest&quot;: 120,
+          &quot;load&quot;: {
+            &quot;rpe&quot;: 8
+          },
+          &quot;progression&quot;: {
+            &quot;rule&quot;: &quot;double&quot;,
+            &quot;upperReps&quot;: 10,
+            &quot;step&quot;: 2.5
+          }
+        },
+        {
+          &quot;exercise&quot;: &quot;plank&quot;,
+          &quot;sets&quot;: 3,
+          &quot;seconds&quot;: 45,
+          &quot;rest&quot;: 60
+        }
+      ]
+    },
+    &quot;b&quot;: {
+      &quot;name&quot;: &quot;Full body B&quot;,
+      &quot;exercises&quot;: [
+        {
+          &quot;exercise&quot;: &quot;deadlift&quot;,
+          &quot;sets&quot;: 1,
+          &quot;reps&quot;: 5,
+          &quot;rest&quot;: 180,
+          &quot;load&quot;: {
+            &quot;weight&quot;: 80
+          },
+          &quot;progression&quot;: {
+            &quot;rule&quot;: &quot;linear&quot;,
+            &quot;step&quot;: 5
+          },
+          &quot;amrapLast&quot;: true
+        },
+        {
+          &quot;exercise&quot;: &quot;pull-up&quot;,
+          &quot;sets&quot;: 3,
+          &quot;reps&quot;: [
+            5,
+            8
+          ],
+          &quot;rest&quot;: 120,
+          &quot;superset&quot;: &quot;A&quot;
+        },
+        {
+          &quot;exercise&quot;: &quot;overhead-press&quot;,
+          &quot;sets&quot;: 3,
+          &quot;reps&quot;: [
+            8,
+            10
+          ],
+          &quot;rest&quot;: 120,
+          &quot;superset&quot;: &quot;A&quot;
+        }
+      ]
+    }
+  },
+  &quot;weeks&quot;: [
+    {
+      &quot;days&quot;: [
+        &quot;a&quot;,
+        null,
+        &quot;b&quot;,
+        null,
+        &quot;a&quot;,
+        null,
+        null
+      ]
+    },
+    {
+      &quot;days&quot;: [
+        &quot;b&quot;,
+        null,
+        &quot;a&quot;,
+        null,
+        &quot;b&quot;,
+        null,
+        null
+      ]
+    }
+  ],
+  &quot;repeat&quot;: 2
+}</code></pre>
+    </main>
+  </body>
+</html>
