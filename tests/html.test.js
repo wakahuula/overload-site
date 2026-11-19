@@ -33,3 +33,12 @@ test('das Dokument ist auf Deutsch deklariert und bindet die Module ein', () => 
   assert.match(html, /scripts\/site\.js/);
   assert.match(html, /styles\/tokens\.css/);
 });
+
+test('der Fallback-Text im HTML entspricht dem deutschen Inhalt', () => {
+  for (const match of html.matchAll(/data-i18n="([^"]+)"[^>]*>([^<]*)</g)) {
+    const [, key, text] = match;
+    const fallback = text.replace(/\s+/g, ' ').trim();
+    if (fallback === '') continue;
+    assert.equal(fallback, content.de[key], `${key}: HTML-Fallback weicht von content.js ab`);
+  }
+});

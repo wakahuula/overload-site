@@ -25,23 +25,13 @@ export const content = {
     'hero.title1': 'Mehr Gewicht.',
     'hero.title2': 'Jede Woche.',
     'hero.lead':
-      'Overload ist der Tracker für Kraftsport, der die Last nach Regeln steigert. Du loggst den Satz, Overload rechnet die nächste Woche. Kein Konto, keine Cloud, keine Ablenkung zwischen den Sätzen.',
+      'Overload ist der Tracker für Kraftsport, der die Last nach Regeln steigert. Du loggst den Satz, Overload rechnet die nächste Woche. Kein Konto, keine Cloud.',
     'hero.ctaPrimary': 'So funktioniert es',
     'hero.ctaSecondary': 'Projekt auf GitHub',
-    'hero.trust1': 'Offline',
-    'hero.trust2': 'Kein Konto',
-    'hero.trust3': 'Alles auf dem Gerät',
-
-    'marquee.1': 'Progressive Overload',
-    'marquee.2': 'Offline-first',
-    'marquee.3': 'Kraftsport',
-    'marquee.4': 'Neue Rekorde',
-    'marquee.5': 'Kein Ballast',
-    'marquee.6': 'Deine Daten',
 
     'principle.title': 'Scrollen lädt die Stange.',
     'principle.lead':
-      'Progressive Overload heißt: ein bisschen mehr als letzte Woche. Overload macht daraus eine Regel statt eines Gefühls und rechnet das Arbeitsgewicht für jede Einheit aus.',
+      'Progressive Overload heißt: ein bisschen mehr als letzte Woche. Overload macht daraus eine Regel und rechnet das Arbeitsgewicht für jede Einheit aus.',
     'principle.barLabel': 'Hantel, die sich beim Scrollen belädt',
     'principle.unit': 'kg',
     'principle.msg0': 'Leere Stange · 20 kg',
@@ -54,9 +44,8 @@ export const content = {
 
     'demo.title': 'Rechne deine Stange aus.',
     'demo.lead':
-      'Stell das Gewicht ein, Overload verteilt es auf die Scheiben. Die Demo nutzt denselben Farbcode wie die App und rechnet in Kilogramm oder Pfund.',
+      'Stell das Gewicht ein, Overload verteilt es auf die Scheiben. Die Farben folgen dem IPF-Code der App.',
     'demo.screenLabel': 'Hantel laden',
-    'demo.screenOffline': 'Offline',
     'demo.unitKg': 'kg',
     'demo.unitLb': 'lbs',
     'demo.unitLabel': 'Einheit wechseln',
@@ -65,11 +54,10 @@ export const content = {
     'demo.weightLabel': 'Gewicht in Kilogramm oder Pfund',
     'demo.note': 'Pro Seite {perSide} · Scheiben: {count}',
     'demo.noteRest': 'Nicht ladbar: {rest} pro Seite',
-    'demo.caption': 'Scheibenrechner mit dem IPF-Farbcode der App.',
 
     'prog.title': 'Was nächste Woche passiert.',
     'prog.lead':
-      'Ein erfülltes Soll hebt den Training Max. Ein Fehlschlag steigt die Schema-Leiter hinauf, und wer auch die letzte Stufe verfehlt, setzt den Training Max zurück. Klick es durch.',
+      'Ein erfülltes Soll hebt den Training Max. Ein Fehlschlag steigt die Schema-Leiter hinauf, und wer auch die letzte Stufe verfehlt, setzt den Training Max zurück.',
     'prog.week': 'Woche',
     'prog.tm': 'Training Max',
     'prog.scheme': 'Schema',
@@ -83,39 +71,29 @@ export const content = {
     'prog.eventStart': 'Start bei Training Max {tm}.',
     'prog.caption': 'Vereinfachte GZCL-Progression, dieselbe Logik wie in der App.',
 
-    'features.title': 'Kein Ballast. Nur Training.',
-    'features.lead':
-      'Overload verzichtet auf alles, was dich vom Satz unter der Stange abhält. Was bleibt, funktioniert auch ohne Empfang.',
+    'features.title': 'Was Overload kann.',
 
-    'feat.programs.tag': 'Programme',
     'feat.programs.title': 'Bewährte Pläne, eigener Builder',
     'feat.programs.text':
       'GZCLP, nSuns und PPL liegen fertig bereit. Oder du baust deinen eigenen Plan: Übungs-Slots, Supersätze, Deload-Wochen und ein Cover für die Bibliothek.',
-    'feat.progression.tag': 'Progression',
     'feat.progression.title': 'Die Last steigt nach Regeln',
     'feat.progression.text':
       'Linear, Double Progression, AMRAP, RPE, RIR, Prozent oder Cycle. Du legst die Regel fest, Overload rechnet das nächste Arbeitsgewicht und hält eine Fail-Policy samt Training-Max-Reset bereit.',
-    'feat.logger.tag': 'Logger',
     'feat.logger.title': 'Zielwerte stehen schon da',
     'feat.logger.text':
       'Vorausgefüllte Sätze, ein Tap bestätigt. Supersätze bleiben gruppiert, der Rest-Timer zählt die Pause und meldet sich auch, wenn die App im Hintergrund liegt. Der letzte T1-Satz ist AMRAP.',
-    'feat.records.tag': 'Rekorde',
     'feat.records.title': 'Der PR-Moment passiert im Satz',
     'feat.records.text':
       'Overload erkennt einen Rekord beim Bestätigen des Satzes, mit Haptik und einem kurzen Flash. Die erste geloggte Leistung ist eine Basislinie und wird nicht gefeiert.',
-    'feat.analysis.tag': 'Analyse',
     'feat.analysis.title': 'Volumen, Balance, Verlauf',
     'feat.analysis.text':
       'Volumen pro Muskel, wöchentliche Drücken:Ziehen-Balance und ein Balance-Trend über mehrere Wochen. Dazu ein Wochenreport, der seinen Vorschlag direkt in den Plan einträgt.',
-    'feat.portability.tag': 'Import & Export',
     'feat.portability.title': 'Deine Historie bleibt deine',
     'feat.portability.text':
       'Hol deine Workouts aus Strong, Hevy, JEFIT, FitNotes oder Boostcamp. Eigene Programme teilst du als CAR-Datei, jeder Block gegen seine Prüfsumme abgesichert.',
-    'feat.bluesky.tag': 'Bluesky',
     'feat.bluesky.title': 'Teilen, wenn du willst',
     'feat.bluesky.text':
-      'Verbinde optional dein Bluesky-Profil per App-Passwort. Feed, Likes und Antworten erscheinen im Profil. Die Verbindung ist freiwillig und berührt deine Trainingsdaten nicht.',
-    'feat.adapt.tag': 'Anpassung',
+      'Verbinde optional dein Bluesky-Profil per App-Passwort. Feed, Likes und Antworten erscheinen im Profil, getrennt von deinen Trainingsdaten.',
     'feat.adapt.title': 'Dein Gerät, deine Einheiten',
     'feat.adapt.text':
       'Kilogramm oder Pfund, Meter oder Fuß: alles ist eine Anzeige-Einstellung. Hell oder dunkel, Deutsch oder Englisch, und die Schriftgröße stellst du selbst ein.',
@@ -139,38 +117,24 @@ export const content = {
     'analysis.title': 'Volumen, Balance und Verlauf.',
     'analysis.lead':
       'Overload zählt nach jeder Session Abschluss-Punkte pro Muskel, vergleicht Drücken und Ziehen und führt den Trend über Wochen. Der Wochenreport schreibt seinen Vorschlag direkt in den Plan.',
-    'analysis.point1': 'Volumen pro Muskel, aus deinen Logs.',
-    'analysis.point2': 'Drücken:Ziehen-Balance jede Woche.',
-    'analysis.point3': 'Balance-Trend über mehrere Wochen.',
-    'analysis.point4': 'Wochenreport mit übernehmbarem Vorschlag.',
-    'analysis.reportLabel': 'Wochenreport',
-    'analysis.reportNote': 'Beispiel: Overload zählt die Sätze der Woche und schlägt die nächste Steigerung vor.',
 
     'privacy.title': 'Dein Studio hat kein WLAN. Egal.',
     'privacy.lead':
-      'Overload läuft vollständig auf dem Gerät. Keine Anmeldung, keine Sync-Warteschleife, kein Server, der mitliest. Auch im Keller ohne Empfang.',
+      'Overload läuft vollständig auf dem Gerät. Keine Anmeldung, keine Sync-Warteschleife, kein Server, der mitliest.',
     'privacy.item1': 'Kein Konto, keine E-Mail, kein Passwort.',
     'privacy.item2': 'Trainingsdaten verlassen das Gerät nicht.',
     'privacy.item3': 'Import und Export in beide Richtungen, jederzeit.',
     'privacy.item4': 'Bluesky bleibt optional und getrennt vom Training.',
-    'privacy.stat1': 'Konten nötig',
-    'privacy.stat2': 'lokal gespeichert',
-    'privacy.stat3': 'Richtungen für Import und Export',
+    'privacy.item5': 'Kein Tracking, keine Werbe-IDs, keine Analytics.',
 
     'balance.label': 'Drücken : Ziehen',
     'balance.push': 'Drücken',
     'balance.pull': 'Ziehen',
-    'balance.note':
-      'Overload rechnet die Balance aus deinen Logs und zeigt den Verlauf über Wochen. Hier mit Beispieldaten.',
     'balance.example': 'Beispieldaten',
 
-    'nogo.title': 'Kein Konto. Kein Abo für die Basics.',
+    'nogo.title': 'Kein Abo für die Basics.',
     'nogo.lead':
       'Andere Tracker sperren den Kern hinter einem Abo. Overload hält Logging, Programme und Datenexport offen.',
-    'nogo.item1': 'Kein Konto, kein Onboarding-Zwang.',
-    'nogo.item2': 'Kein Abo für Logging, Programme und Export.',
-    'nogo.item3': 'Kein Tracking, keine Werbe-IDs, keine Analytics.',
-    'nogo.item4': 'Keine Cloud-Pflicht, kein Sync-Zwang.',
 
     'faq.title': 'Kurz beantwortet.',
     'faq.q1': 'Ist Overload kostenlos?',
@@ -196,7 +160,7 @@ export const content = {
     'download.lead':
       'Android und die Web-Version laufen, die iOS-Fassung ist gebaut und ungeprüft. Store-Releases gibt es noch nicht. Den Entwicklungsstand findest du auf GitHub.',
     'download.cta': 'Auf GitHub ansehen',
-    'download.note': 'Diese Seite setzt keine Cookies und lädt kein Tracking. Nur die Schriften kommen von Google Fonts.',
+    'download.note': 'Diese Seite setzt keine Cookies und lädt kein Tracking.',
 
     'footer.tag': 'Kraftsport-Tracker',
     'footer.license': 'MIT-Lizenz',
@@ -204,7 +168,6 @@ export const content = {
     'footer.plan': 'Plan-Format',
     'footer.planHref': 'plan/',
     'footer.oauth': 'Die Bluesky-Anmeldung nutzt einen auf GitHub Pages registrierten OAuth-Client.',
-    'footer.visit': 'Repository ansehen',
   },
 
   en: {
@@ -225,23 +188,13 @@ export const content = {
     'hero.title1': 'More weight.',
     'hero.title2': 'Every week.',
     'hero.lead':
-      'Overload is the strength tracker that raises the load by rule. You log the set, Overload works out next week. No account, no cloud, nothing between your sets.',
+      'Overload is the strength tracker that raises the load by rule. You log the set, Overload works out next week. No account, no cloud.',
     'hero.ctaPrimary': 'How it works',
     'hero.ctaSecondary': 'Project on GitHub',
-    'hero.trust1': 'Offline',
-    'hero.trust2': 'No account',
-    'hero.trust3': 'Everything on device',
-
-    'marquee.1': 'Progressive Overload',
-    'marquee.2': 'Offline-first',
-    'marquee.3': 'Strength training',
-    'marquee.4': 'New records',
-    'marquee.5': 'No bloat',
-    'marquee.6': 'Your data',
 
     'principle.title': 'Scrolling loads the bar.',
     'principle.lead':
-      'Progressive overload means a little more than last week. Overload turns that into a rule instead of a feeling and works out the load for every session.',
+      'Progressive overload means a little more than last week. Overload turns that into a rule and works out the load for every session.',
     'principle.barLabel': 'Barbell that loads as you scroll',
     'principle.unit': 'kg',
     'principle.msg0': 'Empty bar · 20 kg',
@@ -254,9 +207,8 @@ export const content = {
 
     'demo.title': 'Work out your bar.',
     'demo.lead':
-      'Set the weight and Overload spreads it across the plates. The demo uses the same colour code as the app and works in kilograms or pounds.',
+      'Set the weight and Overload spreads it across the plates. The colours follow the app’s IPF code.',
     'demo.screenLabel': 'Load barbell',
-    'demo.screenOffline': 'Offline',
     'demo.unitKg': 'kg',
     'demo.unitLb': 'lbs',
     'demo.unitLabel': 'Switch unit',
@@ -265,11 +217,10 @@ export const content = {
     'demo.weightLabel': 'Weight in kilograms or pounds',
     'demo.note': 'Per side {perSide} · plates: {count}',
     'demo.noteRest': 'Not loadable: {rest} per side',
-    'demo.caption': 'Plate calculator with the app IPF colour code.',
 
     'prog.title': 'What happens next week.',
     'prog.lead':
-      'A met target raises the training max. A miss climbs the scheme ladder, and miss the last scheme and the training max resets. Click through it.',
+      'A met target raises the training max. A miss climbs the scheme ladder, and miss the last scheme and the training max resets.',
     'prog.week': 'Week',
     'prog.tm': 'Training max',
     'prog.scheme': 'Scheme',
@@ -283,39 +234,29 @@ export const content = {
     'prog.eventStart': 'Starting at a training max of {tm}.',
     'prog.caption': 'Simplified GZCL progression, the same logic the app uses.',
 
-    'features.title': 'No bloat. Just training.',
-    'features.lead':
-      'Overload drops everything that stands between you and the set under the bar. What stays works without a signal.',
+    'features.title': 'What Overload does.',
 
-    'feat.programs.tag': 'Programs',
     'feat.programs.title': 'Proven plans, your own builder',
     'feat.programs.text':
       'GZCLP, nSuns and PPL come ready to go. Or build your own: exercise slots, supersets, deload weeks and a cover for your library.',
-    'feat.progression.tag': 'Progression',
     'feat.progression.title': 'The load rises by rule',
     'feat.progression.text':
       'Linear, double progression, AMRAP, RPE, RIR, percentage or cycle. You set the rule, Overload works out the next working weight and keeps a fail policy with training-max reset.',
-    'feat.logger.tag': 'Logger',
     'feat.logger.title': 'Targets are already there',
     'feat.logger.text':
       'Pre-filled sets, one tap confirms. Supersets stay grouped, the rest timer counts your break and notifies you even when the app is in the background. The last T1 set is AMRAP.',
-    'feat.records.tag': 'Records',
     'feat.records.title': 'The PR moment happens in the set',
     'feat.records.text':
       'Overload spots a record the moment you confirm the set, with haptics and a short flash. Your first logged result is a baseline and is not celebrated.',
-    'feat.analysis.tag': 'Analysis',
     'feat.analysis.title': 'Volume, balance, trend',
     'feat.analysis.text':
       'Volume per muscle, a weekly push:pull balance and a balance trend across weeks. Plus a weekly report that writes its suggestion straight into your plan.',
-    'feat.portability.tag': 'Import & export',
     'feat.portability.title': 'Your history stays yours',
     'feat.portability.text':
       'Bring your workouts over from Strong, Hevy, JEFIT, FitNotes or Boostcamp. Share your own programs as a CAR file, every block checked against its hash.',
-    'feat.bluesky.tag': 'Bluesky',
     'feat.bluesky.title': 'Share, if you want to',
     'feat.bluesky.text':
-      'Optionally connect your Bluesky profile with an app password. Feed, likes and replies show up in your profile. Connecting is voluntary and never touches your training data.',
-    'feat.adapt.tag': 'Adaptation',
+      'Optionally connect your Bluesky profile with an app password. Feed, likes and replies show up in your profile, separate from your training data.',
     'feat.adapt.title': 'Your device, your units',
     'feat.adapt.text':
       'Kilograms or pounds, metres or feet: all just display settings. Light or dark, German or English, and you set the text size yourself.',
@@ -339,38 +280,24 @@ export const content = {
     'analysis.title': 'Volume, balance and trend.',
     'analysis.lead':
       'After every session Overload counts completion points per muscle, compares push and pull and follows the trend across weeks. The weekly report writes its suggestion straight into your plan.',
-    'analysis.point1': 'Volume per muscle, from your logs.',
-    'analysis.point2': 'Push:pull balance every week.',
-    'analysis.point3': 'Balance trend across several weeks.',
-    'analysis.point4': 'Weekly report with a suggestion you can apply.',
-    'analysis.reportLabel': 'Weekly report',
-    'analysis.reportNote': 'Example: Overload counts the week’s sets and suggests the next increase.',
 
     'privacy.title': 'Your gym has no signal. Fine.',
     'privacy.lead':
-      'Overload runs entirely on the device. No sign-in, no sync queue, no server reading along. Even in a basement with no signal.',
+      'Overload runs entirely on the device. No sign-in, no sync queue, no server reading along.',
     'privacy.item1': 'No account, no email, no password.',
     'privacy.item2': 'Training data never leaves the device.',
     'privacy.item3': 'Import and export in both directions, any time.',
     'privacy.item4': 'Bluesky stays optional and separate from training.',
-    'privacy.stat1': 'accounts required',
-    'privacy.stat2': 'stored locally',
-    'privacy.stat3': 'directions for import and export',
+    'privacy.item5': 'No tracking, no ad IDs, no analytics.',
 
     'balance.label': 'Push : Pull',
     'balance.push': 'Push',
     'balance.pull': 'Pull',
-    'balance.note':
-      'Overload derives the balance from your logs and shows the trend over weeks. Shown here with sample data.',
     'balance.example': 'Sample data',
 
-    'nogo.title': 'No account. No paywall on the basics.',
+    'nogo.title': 'No paywall on the basics.',
     'nogo.lead':
       'Other trackers lock the core behind a subscription. Overload keeps logging, programs and export open.',
-    'nogo.item1': 'No account, no forced onboarding.',
-    'nogo.item2': 'No subscription for logging, programs and export.',
-    'nogo.item3': 'No tracking, no ad IDs, no analytics.',
-    'nogo.item4': 'No cloud requirement, no forced sync.',
 
     'faq.title': 'Short answers.',
     'faq.q1': 'Is Overload free?',
@@ -396,7 +323,7 @@ export const content = {
     'download.lead':
       'Android and the web version run, the iOS build exists and is unchecked. There are no store releases yet. You can follow the state of things on GitHub.',
     'download.cta': 'View on GitHub',
-    'download.note': 'This page sets no cookies and loads no tracking. Only the fonts come from Google Fonts.',
+    'download.note': 'This page sets no cookies and loads no tracking.',
 
     'footer.tag': 'Strength tracker',
     'footer.license': 'MIT License',
@@ -404,6 +331,5 @@ export const content = {
     'footer.plan': 'Plan format',
     'footer.planHref': 'plan/en/',
     'footer.oauth': 'Bluesky sign-in uses an OAuth client registered on GitHub Pages.',
-    'footer.visit': 'View the repository',
   },
 };
