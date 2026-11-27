@@ -5,7 +5,7 @@
   "redirect_uris": [
     "io.github.wakahuula:/auth/callback"
   ],
-  "scope": "atproto repo:app.bsky.feed.like repo:app.bsky.feed.post repo:io.github.wakahuula.overload.workout.session rpc:*?aud=did:web:api.bsky.app#bsky_appview",
+  "scope": "atproto repo:app.bsky.feed.like repo:app.bsky.feed.post repo:io.github.wakahuula.overload.workout.session blob:image/* rpc:*?aud=did:web:api.bsky.app#bsky_appview",
   "token_endpoint_auth_method": "none",
   "response_types": [
     "code"
